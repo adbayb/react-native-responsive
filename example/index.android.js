@@ -3,13 +3,13 @@
  * https://github.com/facebook/react-native
  */
 
-import React, {
+import React, {Component} from "react";
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from "react-native";
 
 class ReactNativeResponsive extends Component {
   render() {
@@ -32,20 +32,20 @@ class ReactNativeResponsive extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    textAlign: "center",
+    margin: 10
   },
   instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 5
+  }
 });
 
-AppRegistry.registerComponent('ReactNativeResponsive', () => ReactNativeResponsive);
+AppRegistry.registerComponent("ReactNativeResponsive", () => ReactNativeResponsive);

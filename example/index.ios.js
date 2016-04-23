@@ -1,16 +1,15 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- * @flow
  */
 
-import React, {
+import React, {Component} from "react";
+import {
   AppRegistry,
-  Component,
   StyleSheet,
   Text,
   View
-} from 'react-native';
+} from "react-native";
 
 class ReactNativeResponsive extends Component {
   render() {
@@ -20,11 +19,10 @@ class ReactNativeResponsive extends Component {
           Welcome to React Native!
         </Text>
         <Text style={styles.instructions}>
-          To get started, edit index.ios.js
+          To get started, edit index.android.js
         </Text>
         <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
+          Shake or press menu button for dev menu
         </Text>
       </View>
     );
@@ -34,20 +32,20 @@ class ReactNativeResponsive extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF"
   },
   welcome: {
     fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+    textAlign: "center",
+    margin: 10
   },
   instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    textAlign: "center",
+    color: "#333333",
+    marginBottom: 5
+  }
 });
 
-AppRegistry.registerComponent('ReactNativeResponsive', () => ReactNativeResponsive);
+AppRegistry.registerComponent("ReactNativeResponsive", () => ReactNativeResponsive);
