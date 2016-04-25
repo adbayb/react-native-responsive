@@ -18,12 +18,7 @@ class ReactNativeResponsive extends Component {
 	render() {
 		return (
 			<ResponsiveLayout style={styles.responsivelayout}>
-				<MediaQuery style={styles.mediaquery} minWidth={200} maxWidth={1080}>
-					<View style={styles.container2}>
-						<Text> Test Responsive </Text>
-					</View>
-				</MediaQuery>
-				<MediaQuery style={styles.mediaquery} minWidth={200} maxWidth={4000}>
+				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080}>
 					<View style={styles.container1}>
 						<Text> Test Responsive </Text>
 					</View>

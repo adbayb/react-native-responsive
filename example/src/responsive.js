@@ -45,7 +45,7 @@ class ResponsiveLayout extends React.Component {
 			la taille de la status bar android (px= 24dp * pixel ratio (48px si pixel ration = 2)) et des bouttons
 			de navigation android (px = 48 dp * pixel ration (96px dans le cas d'un pixel ratio de 2))
 		*/
-		console.log(event.nativeEvent.layout, Dimensions.get("window"));
+		//console.log(event.nativeEvent.layout, Dimensions.get("window"));
 		this.setState({
 			pxHeight: event.nativeEvent.layout.height * this.pixelRatio,
 			pxWidth: event.nativeEvent.layout.width * this.pixelRatio,
