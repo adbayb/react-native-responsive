@@ -56,7 +56,7 @@ class ResponsiveLayout extends React.Component {
 
 	render() {
 		return (
-			<View onLayout={this.onLayout} style={this.props.style}>
+			<View style={this.props.style} onLayout={this.onLayout}>
 				<Text>
 					Debug => {(() => {
 						return "Container Virtual Height = " + this.state.dpHeight + " Container Virtual Width = " + this.state.dpWidth
