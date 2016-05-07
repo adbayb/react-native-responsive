@@ -4,7 +4,6 @@ import {
 } from "react-native";
 
 class Service {
-	static orientation = false;
 	//En statique pour éviter des call répétitifs vers les getters Dimensions et PixelRatio:
 	static pixelRatio = PixelRatio.get();
 	//Les Dimensions initiales sont settées avant runApplication(). On peut donc les getter en statique dans un service.
