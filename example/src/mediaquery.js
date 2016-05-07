@@ -1,69 +1,112 @@
 import React from "react";
-import {
-	Dimensions,
-	PixelRatio,
-	View
-} from "react-native";
+import CustomPropTypes from "./proptypes.js";
+import Service from "./service/index.js";
 
 class MediaQuery extends React.Component {
 	constructor(props) {
 		super(props);
 
-		//Pour le moment, le caractère responsive se basera sur des propriétés immutables du screen device
-		//(telle que la résolution ou le pixel ratio).
+		this.state = {
+			width: 0,
+			height: 0
+		};
+
+		//La vérification des contraintes devices se font dans le constructeur
+		//puisqu'elles se basent sur des propriétés immutables du screen device
+		//(telle que la résolution ou le pixel ratio):
 		//Pour des examples de configurations Media Query suivant les appareils:
 		//cf. https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
-		this.pixelRatio = PixelRatio.get();
-		//Les Dimensions initiales sont settées avant runApplication(). On peut donc les getter dans le constructeur
-		//On peut ainsi stocke la résolution (hauteur, largeur) du device et que cette dernière
-		//ne change pas au cours du temps (sinon wtf :))
-		//Cependant, Dimensions.get récupère la résolution du screen à un instant t: elle donnera des valeurs différentes
-		//suivant si screen en mode portrait ou paysage: étant donné que le nombre de pixel en hauteur est toujours plus
-		//important qu'en largeur (screen ratio généralement 4:3 ou 16:9), on utilise la fonction max et min de la lib Math
-		//pour assigner notre hauteur et largeur de façon immutable (indépendemment donc de la résolution):
-		this.deviceWidth = Math.min(Dimensions.get("window").width, Dimensions.get("window").height) * this.pixelRatio;
-		this.deviceHeight = Math.max(Dimensions.get("window").width, Dimensions.get("window").height) * this.pixelRatio;
-
-		this.isDisplayed = this.isValidDeviceDimensions() && this.isValidPixelRatio();
+		this.isViewableStatic = this.isValidDevice(
+			Service.deviceWidth,
+			Service.deviceHeight,
+			Service.pixelRatio
+		);
 	}
 
-	isValidDeviceDimensions() {
-		//TODO: gérer undefined:
-		if(this.props.deviceWidth !== this.deviceWidth
-			|| this.props.deviceHeight !== this.deviceHeight
-			|| this.props.minDeviceWidth > this.deviceWidth
-			|| this.props.maxDeviceWidth < this.deviceWidth
-			|| this.props.minDeviceHeight > this.deviceHeight
-			|| this.props.maxDeviceHeight < this.deviceHeight) {
-				return false;
+	//VALIDATIONS DES CONTRAINTES DE TAILLES SPECIFIQUES AU HARDWARE (immutables):
+	isValidDevice(width, height, pixelRatio) {
+		//console.log("isValid()", this.isValidDeviceWidth(width), this.isValidDeviceHeight(height), this.isValidDevicePixelRatio(pixelRatio));
+
+		return this.isValidDeviceWidth(width) && this.isValidDeviceHeight(height) && this.isValidDevicePixelRatio(pixelRatio);
+	}
+
+	isValidDeviceWidth(width) {
+		//Les falsy values en Javascript correspondent à undefined, null, false, 0, ""...
+		//donc inutile de faire un call sur hasOwnProperty, il suffit simplement de
+		//checker si la condition est true (par exemple, si la variable est undefined, la condition sera false):
+
+		//La prop deviceWidth a une importance plus élévée que min et max, on le test en premier:
+		if(this.props.deviceWidth)
+			return this.props.deviceWidth === width;
+		else {
+			let min = this.props.minDeviceWidth;
+			let max = this.props.maxDeviceWidth;
+
+			if(min || max)
+				return Service.isInInterval(width, min, max);
+		}
+
+		//Par défault, si aucune propriété width n'est spécifiée,
+		//on considère la largeur comme valide (pour permettre l'affichage des enfants par défaut):
+		return true;
+	}
+
+	isValidDeviceHeight(height) {
+		if(this.props.deviceHeight)
+			return this.props.deviceHeight === height;
+		else {
+			let min = this.props.minDeviceHeight;
+			let max = this.props.maxDeviceHeight;
+
+			if(min || max)
+				return Service.isInInterval(height, min, max);
 		}
 
 		return true;
 	}
 
-	isValidPixelRatio() {
-		//TODO: gérer undefined:
-		if(this.props.minPixelRatio > this.pixelRatio
-			||this.props.maxPixelRatio < this.pixelRatio) {
-				return false;
+	isValidDevicePixelRatio(pixelRatio) {
+		if(this.props.pixelRatio)
+			return this.props.pixelRatio === pixelRatio;
+		else {
+			let min = this.props.minPixelRatio;
+			let max = this.props.maxPixelRatio;
+
+			if(min || max)
+				return Service.isInInterval(pixelRatio, min, max);
 		}
 
 		return true;
 	}
+
+	//VALIDATIONS DES CONTRAINTES DE TAILLES EVOLUANT DANS LE TEMPS (orientation...):
+	//TODO: @faire dans responsivelayout qui gérera le get de l'orientation et l'envoiera à mediaquery
+	//si le prop orientation n'est pas false dans mediaquery alors on switche automatiquement en mode dynamique!
+	//mediaquery peut fonctionner seule mais juste avec les propriétés immutables!:
+	/*onLayout(event) {
+		if(!Service.orientation) {
+			console.log("onLayout()", event.nativeEvent);
+			Service.debounce(() => console.log("Ayoub"), 2000);
+			Service.orientation = true;
+		}
+	}*/
 
 	render() {
+		//TODO: A commenter, juste pour les tests comme le hot reloading ne relance pas le constructeur:
+		this.isViewableStatic = this.isValidDevice(Service.deviceWidth, Service.deviceHeight, Service.pixelRatio);
 		console.log(
-			this.props.minDeviceWidth, this.props.maxDeviceWidth,
-			this.props.minDeviceHeight, this.props.maxDeviceHeight,
-			this.deviceWidth, this.deviceHeight,
-			this.pixelRatio, this.isDisplayed
+			"render()\n",
+			"this.props.minDeviceWidth = " + this.props.minDeviceWidth + "\n",
+			"this.props.maxDeviceWidth = " + this.props.maxDeviceWidth + "\n",
+			"this.props.minDeviceHeight = " + this.props.minDeviceHeight + "\n",
+			"this.props.maxDeviceHeight = " + this.props.maxDeviceHeight + "\n",
+			"this.deviceWidth = " + Service.deviceWidth + "\n",
+			"this.deviceHeight = " + Service.deviceHeight + "\n",
+			"this.pixelRatio = " + Service.pixelRatio + "\n",
+			"this.isViewableStatic = " + this.isViewableStatic
 		);
-		if(this.isDisplayed) {
-			return (
-				<View style={this.props.style} onLayout={this.onLayout}>
-					{this.props.children}
-				</View>
-			);
+		if(this.isViewableStatic) {
+			return this.props.children;
 		}
 		//Retourner null est une indication explicite à React de ne rien afficher:
 		return null;
@@ -71,13 +114,15 @@ class MediaQuery extends React.Component {
 }
 
 //cf. https://developer.mozilla.org/fr/docs/Web/CSS/Media_queries#Pseudo-BNF_(pour_ceux_qui_aiment_ce_genre_de_choses)
-//TODO: Gérer orientation dans une future version:
 MediaQuery.propTypes = {
 	style: React.PropTypes.number,
-	children: React.PropTypes.oneOfType([
-		React.PropTypes.element,
-		React.PropTypes.arrayOf(React.PropTypes.element)
-	]),
+	/*children: React.PropTypes.oneOfType([
+		React.PropTypes.element
+		//MediaQuery n'est pas un container d'élément d'où le fait qu'il ne prend pas de tableau d'éléments:
+		//React.PropTypes.arrayOf(React.PropTypes.element)
+	]),*/
+	children: CustomPropTypes.childrenValidator,
+
 	deviceWidth: React.PropTypes.number,
 	minDeviceWidth: React.PropTypes.number,
 	maxDeviceWidth: React.PropTypes.number,
@@ -87,6 +132,8 @@ MediaQuery.propTypes = {
 	pixelRatio: React.PropTypes.number,
 	minPixelRatio: React.PropTypes.number,
 	maxPixelRatio: React.PropTypes.number
+
+	//orientation: React.PropTypes.oneOf(["landscape", "portrait"])//En privé (transmis par responsivelayout)
 };
 
 export default MediaQuery;

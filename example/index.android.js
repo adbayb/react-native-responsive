@@ -11,19 +11,29 @@ import {
 	View
 } from "react-native";
 
-import ResponsiveLayout from "./src/responsive.js";
+import ResponsiveLayout from "./src/responsive.js";//ResponsiveStore?
 import MediaQuery from "./src/mediaquery.js";
 
 class ReactNativeResponsive extends Component {
 	render() {
 		return (
-			<ResponsiveLayout style={styles.responsivelayout}>
+			<View style={{flex: 1}}>
 				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080}>
-					<View style={styles.container1}>
-						<Text> Test Responsive </Text>
+					<View style={[styles.container, {backgroundColor: "blue"}]}>
+						<Text> Container 1 </Text>
 					</View>
 				</MediaQuery>
-			</ResponsiveLayout>
+				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080} maxPixelRatio={3}>
+					<View style={[styles.container, {backgroundColor: "white"}]}>
+						<Text> Container 2 </Text>
+					</View>
+				</MediaQuery>
+				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080}>
+					<View style={[styles.container, {backgroundColor: "red"}]}>
+						<Text> Container 3 </Text>
+					</View>
+				</MediaQuery>
+			</View>
 		);
 	}
 }
@@ -37,17 +47,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "#000000"
 	},
-	container1: {
+	"container": {
 		flex: 1,
 		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#FF0000"
-	},
-	container2: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-		backgroundColor: "#0000FF"
+		alignItems: "center"
 	}
 });
 
