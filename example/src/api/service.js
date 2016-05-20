@@ -6,6 +6,7 @@ import {
 class Service {
 	//En statique pour éviter des call répétitifs vers les getters Dimensions et PixelRatio:
 	static pixelRatio = PixelRatio.get();
+
 	//Les Dimensions initiales sont settées avant runApplication(). On peut donc les getter en statique dans un service.
 	//On peut ainsi stocke la résolution (hauteur, largeur) du device et que cette dernière
 	//ne change pas au cours du temps (sinon wtf :))
@@ -13,8 +14,17 @@ class Service {
 	//suivant si screen en mode portrait ou paysage: étant donné que le nombre de pixel en hauteur est toujours plus
 	//important qu'en largeur (screen ratio généralement 4:3 ou 16:9), on utilise la fonction max et min de la lib Math
 	//pour assigner notre hauteur et largeur de façon immutable (indépendemment donc de la résolution):
-	static deviceWidth = Math.min(Dimensions.get("window").width, Dimensions.get("window").height) * Service.pixelRatio;
-	static deviceHeight = Math.max(Dimensions.get("window").width, Dimensions.get("window").height) * Service.pixelRatio;
+
+	//On exprimera la hauteur et la largeur suivant deux unités de mesures: le pixel et le dp:
+	//pixel = dimensions réelles et dp = dimensions "virtuelles":
+	//dp = Density Independent pixel (px = dp * (dpi / 160) = dp * pixel ratio (si pixel ratio = 2, 1dp = 2px))
+	//(cf. http://developer.android.com/guide/practices/screens_support.html)
+	//Ici en dp:
+	static dpDeviceWidth = Math.min(Dimensions.get("window").width, Dimensions.get("window").height);
+	static dpDeviceHeight = Math.max(Dimensions.get("window").width, Dimensions.get("window").height);
+	//Ici en px:
+	static pxDeviceWidth = Service.dpDeviceWidth * Service.pixelRatio;
+	static pxDeviceHeight = Service.dpDeviceHeight * Service.pixelRatio;
 
 	static isInInterval(x, min, max) {
 		if(x) {

@@ -1,23 +1,21 @@
 /**
-* Sample React Native App
-* https://github.com/facebook/react-native
-*/
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ */
 
-import React, {Component} from "react";
+import React, { Component } from "react";
 import {
 	AppRegistry,
 	StyleSheet,
 	Text,
 	View
 } from "react-native";
-
-import ResponsiveLayout from "./src/responsive.js";//ResponsiveStore?
-import MediaQuery from "./src/mediaquery.js";
+import { MediaQuery, MediaQueryListener } from "./src/index.js"; //MediaQueryStore?
 
 class ReactNativeResponsive extends Component {
 	render() {
-		return (
-			<View style={{flex: 1}}>
+		return(
+			<MediaQueryListener style={{flex: 1}}>
 				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080}>
 					<View style={[styles.container, {backgroundColor: "blue"}]}>
 						<Text> Container 1 </Text>
@@ -33,7 +31,7 @@ class ReactNativeResponsive extends Component {
 						<Text> Container 3 </Text>
 					</View>
 				</MediaQuery>
-			</View>
+			</MediaQueryListener>
 		);
 	}
 }

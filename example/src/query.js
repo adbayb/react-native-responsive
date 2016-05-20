@@ -1,26 +1,24 @@
 import React from "react";
-import CustomPropTypes from "./proptypes.js";
-import Service from "./service/index.js";
+import { Service, CustomPropTypes } from "./api";
 
-class MediaQuery extends React.Component {
+class Query extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			width: 0,
-			height: 0
+			height: 0,
+			//La vérification des contraintes devices se font dans le constructeur
+			//puisqu'elles se basent sur des propriétés immutables du screen device
+			//(telle que la résolution ou le pixel ratio):
+			//Pour des examples de configurations Media Query suivant les appareils:
+			//cf. https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
+			isValidDevice: this.isValidDevice(
+				Service.pxDeviceWidth,
+				Service.pxDeviceHeight,
+				Service.pixelRatio
+			)
 		};
-
-		//La vérification des contraintes devices se font dans le constructeur
-		//puisqu'elles se basent sur des propriétés immutables du screen device
-		//(telle que la résolution ou le pixel ratio):
-		//Pour des examples de configurations Media Query suivant les appareils:
-		//cf. https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
-		this.isViewableStatic = this.isValidDevice(
-			Service.deviceWidth,
-			Service.deviceHeight,
-			Service.pixelRatio
-		);
 	}
 
 	//VALIDATIONS DES CONTRAINTES DE TAILLES SPECIFIQUES AU HARDWARE (immutables):
@@ -92,20 +90,19 @@ class MediaQuery extends React.Component {
 	}*/
 
 	render() {
-		//TODO: A commenter, juste pour les tests comme le hot reloading ne relance pas le constructeur:
-		this.isViewableStatic = this.isValidDevice(Service.deviceWidth, Service.deviceHeight, Service.pixelRatio);
 		console.log(
 			"render()\n",
 			"this.props.minDeviceWidth = " + this.props.minDeviceWidth + "\n",
 			"this.props.maxDeviceWidth = " + this.props.maxDeviceWidth + "\n",
 			"this.props.minDeviceHeight = " + this.props.minDeviceHeight + "\n",
 			"this.props.maxDeviceHeight = " + this.props.maxDeviceHeight + "\n",
-			"this.deviceWidth = " + Service.deviceWidth + "\n",
-			"this.deviceHeight = " + Service.deviceHeight + "\n",
-			"this.pixelRatio = " + Service.pixelRatio + "\n",
-			"this.isViewableStatic = " + this.isViewableStatic
+			"pxDeviceWidth = " + Service.pxDeviceWidth + "\n",
+			"pxDeviceHeight = " + Service.pxDeviceHeight + "\n",
+			"pixelRatio = " + Service.pixelRatio + "\n",
+			"this.state.isValidDevice = " + this.state.isValidDevice
 		);
-		if(this.isViewableStatic) {
+
+		if(this.state.isValidDevice) {
 			return this.props.children;
 		}
 		//Retourner null est une indication explicite à React de ne rien afficher:
@@ -114,7 +111,7 @@ class MediaQuery extends React.Component {
 }
 
 //cf. https://developer.mozilla.org/fr/docs/Web/CSS/Media_queries#Pseudo-BNF_(pour_ceux_qui_aiment_ce_genre_de_choses)
-MediaQuery.propTypes = {
+Query.propTypes = {
 	style: React.PropTypes.number,
 	/*children: React.PropTypes.oneOfType([
 		React.PropTypes.element
@@ -122,7 +119,7 @@ MediaQuery.propTypes = {
 		//React.PropTypes.arrayOf(React.PropTypes.element)
 	]),*/
 	children: CustomPropTypes.childrenValidator,
-
+	//Hardware Device Constraints:
 	deviceWidth: React.PropTypes.number,
 	minDeviceWidth: React.PropTypes.number,
 	maxDeviceWidth: React.PropTypes.number,
@@ -131,9 +128,13 @@ MediaQuery.propTypes = {
 	maxDeviceHeight: React.PropTypes.number,
 	pixelRatio: React.PropTypes.number,
 	minPixelRatio: React.PropTypes.number,
-	maxPixelRatio: React.PropTypes.number
+	maxPixelRatio: React.PropTypes.number,
 
-	//orientation: React.PropTypes.oneOf(["landscape", "portrait"])//En privé (transmis par responsivelayout)
+	orientation: React.PropTypes.oneOf(["landscape", "portrait"]) //En privé (transmis par responsivelayout)
 };
 
-export default MediaQuery;
+Query.defaultProps = {
+	//orientation: "portrait"
+};
+
+export default Query;
