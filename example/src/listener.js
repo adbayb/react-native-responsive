@@ -2,11 +2,14 @@ import React from "react";
 import {
 	View
 } from "react-native";
+import EventEmitter from "EventEmitter";
 import { Service } from "./api";
 
-class Listener extends React.Component {
+class MediaQueryListener extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.eventEmitter = new EventEmitter();
 	}
 
 	onLayout(event) {
@@ -29,10 +32,13 @@ class Listener extends React.Component {
 		*/
 		this.setState({
 			width: event.nativeEvent.layout.width,
-			height: event.nativeEvent.layout.height,
-			orientation: (event.nativeEvent.layout.width === Service.dpDeviceWidth) ? "portrait" : "landscape"
+			height: event.nativeEvent.layout.height
 		}, () => {
-			console.log(this.state);
+			let orientation = (this.state.width > Service.dpDeviceWidth) ? "landscape" : "portrait";
+
+			//let event = new CustomEvent("toto");
+			//window.dispatchEvent(event);
+			Service.eventEmitter.emit(Service.eventType, orientation);
 		});
 		//console.log("Event", event.nativeEvent.layout);
 	}
@@ -44,10 +50,30 @@ class Listener extends React.Component {
 			</View>
 		);
 	}
+
+	/*
+	renderChildren(children) {
+		//cf. https://facebook.github.io/react/docs/top-level-api.html#react.children
+		return React.Children.map(children, (child) => {
+			//console.log(child.props);
+			return React.cloneElement(child, {
+				event: this.eventEmitter
+			});
+		});
+	}
+
+	render() {
+		return (
+			<View {...this.props} onLayout={(event) => this.onLayout(event)}>
+				{this.renderChildren(this.props.children)}
+			</View>
+		);
+	}
+	*/
 }
 
-Listener.propTypes = {
+MediaQueryListener.propTypes = {
 	...View.propTypes
 };
 
-export default Listener;
+export default MediaQueryListener;

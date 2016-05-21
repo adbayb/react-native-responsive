@@ -1,7 +1,8 @@
 import React from "react";
-import { Service, CustomPropTypes } from "./api";
+import { Service, CustomPropTypes, InjectEventEmitter } from "./api";
 
-class Query extends React.Component {
+@InjectEventEmitter
+class MediaQuery extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -13,12 +14,32 @@ class Query extends React.Component {
 			//(telle que la résolution ou le pixel ratio):
 			//Pour des examples de configurations Media Query suivant les appareils:
 			//cf. https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
-			isValidDevice: this.isValidDevice(
+			isVisible: this.isValidDevice(
 				Service.pxDeviceWidth,
 				Service.pxDeviceHeight,
 				Service.pixelRatio
 			)
 		};
+	}
+
+	/*Utilisation des évènements DOM pour la communication entre composants
+	(utile dans notre cas, pour éviter de boucler sur tous les enfants de listener en clonant l'élément
+	pour pouvoir lui attacher une prop permettant de spécifier la modification de l'orientation):
+	cf. https://facebook.github.io/react/tips/communicate-between-components.html*/
+	componentDidMount() {
+		//Sous ES5, on doit utiliser le mixin Subscriable. Cependant sous ES2015, les mixins ne sont pas supportés
+		//On doit donc gérer l'inscription sur notre event emitter global (instancié dans notre classe Service en statique)
+		//dans le cycle de vie de notre composant.
+		//cf. node_modules\react-native\Libraries\Components\Subscribable.js pour le raisonnement d'implémentation dans le lifecycle:
+		Service.eventEmitter.addListener(Service.eventType, this.onOrientation);
+	}
+
+	componentWillUnmount() {
+		Service.eventEmitter.removeAllListeners(Service.eventType);
+	}
+
+	onOrientation(orientation) {
+		console.log("Query orientation", orientation);
 	}
 
 	//VALIDATIONS DES CONTRAINTES DE TAILLES SPECIFIQUES AU HARDWARE (immutables):
@@ -77,19 +98,8 @@ class Query extends React.Component {
 		return true;
 	}
 
-	//VALIDATIONS DES CONTRAINTES DE TAILLES EVOLUANT DANS LE TEMPS (orientation...):
-	//TODO: @faire dans responsivelayout qui gérera le get de l'orientation et l'envoiera à mediaquery
-	//si le prop orientation n'est pas false dans mediaquery alors on switche automatiquement en mode dynamique!
-	//mediaquery peut fonctionner seule mais juste avec les propriétés immutables!:
-	/*onLayout(event) {
-		if(!Service.orientation) {
-			console.log("onLayout()", event.nativeEvent);
-			Service.debounce(() => console.log("Ayoub"), 2000);
-			Service.orientation = true;
-		}
-	}*/
-
 	render() {
+		console.log(this);
 		console.log(
 			"render()\n",
 			"this.props.minDeviceWidth = " + this.props.minDeviceWidth + "\n",
@@ -99,10 +109,10 @@ class Query extends React.Component {
 			"pxDeviceWidth = " + Service.pxDeviceWidth + "\n",
 			"pxDeviceHeight = " + Service.pxDeviceHeight + "\n",
 			"pixelRatio = " + Service.pixelRatio + "\n",
-			"this.state.isValidDevice = " + this.state.isValidDevice
+			"this.state.isVisible = " + this.state.isVisible
 		);
 
-		if(this.state.isValidDevice) {
+		if(this.state.isVisible) {
 			return this.props.children;
 		}
 		//Retourner null est une indication explicite à React de ne rien afficher:
@@ -111,7 +121,7 @@ class Query extends React.Component {
 }
 
 //cf. https://developer.mozilla.org/fr/docs/Web/CSS/Media_queries#Pseudo-BNF_(pour_ceux_qui_aiment_ce_genre_de_choses)
-Query.propTypes = {
+MediaQuery.propTypes = {
 	style: React.PropTypes.number,
 	/*children: React.PropTypes.oneOfType([
 		React.PropTypes.element
@@ -130,11 +140,12 @@ Query.propTypes = {
 	minPixelRatio: React.PropTypes.number,
 	maxPixelRatio: React.PropTypes.number,
 
-	orientation: React.PropTypes.oneOf(["landscape", "portrait"]) //En privé (transmis par responsivelayout)
+	orientation: React.PropTypes.oneOf(["landscape", "portrait"]), //En privé (transmis par responsivelayout)
+	onOrientation: React.PropTypes.func
 };
 
-Query.defaultProps = {
+MediaQuery.defaultProps = {
 	//orientation: "portrait"
 };
 
-export default Query;
+export default MediaQuery;

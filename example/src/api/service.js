@@ -2,8 +2,15 @@ import {
 	Dimensions,
 	PixelRatio
 } from "react-native";
+import EventEmitter from "EventEmitter";
 
 class Service {
+	//Event services:
+	static eventEmitter = new EventEmitter();
+	static eventType = "MediaQuery-OrientationChange";
+
+	//Device dimensions services:
+	
 	//En statique pour éviter des call répétitifs vers les getters Dimensions et PixelRatio:
 	static pixelRatio = PixelRatio.get();
 
