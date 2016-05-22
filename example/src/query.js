@@ -28,14 +28,16 @@ class MediaQuery extends React.Component {
 	cf. https://facebook.github.io/react/tips/communicate-between-components.html*/
 	componentDidMount() {
 		//Sous ES5, on doit utiliser le mixin Subscriable. Cependant sous ES2015, les mixins ne sont pas supportés
-		//On doit donc gérer l'inscription sur notre event emitter global (instancié dans notre classe Service en statique)
+		//On doit donc gérer l'inscription sur notre event emitter injecté via le décorateur
 		//dans le cycle de vie de notre composant.
 		//cf. node_modules\react-native\Libraries\Components\Subscribable.js pour le raisonnement d'implémentation dans le lifecycle:
-		Service.eventEmitter.addListener(Service.eventType, this.onOrientation);
+		if(this.context.eventEmitter)
+			this.context.eventEmitter.addListener(Service.eventType, this.onOrientation);
 	}
 
 	componentWillUnmount() {
-		Service.eventEmitter.removeAllListeners(Service.eventType);
+		if(this.context.eventEmitter)
+			this.context.eventEmitter.removeAllListeners(Service.eventType);
 	}
 
 	onOrientation(orientation) {
@@ -99,6 +101,7 @@ class MediaQuery extends React.Component {
 	}
 
 	render() {
+		/*
 		console.log(this);
 		console.log(
 			"render()\n",
@@ -111,6 +114,7 @@ class MediaQuery extends React.Component {
 			"pixelRatio = " + Service.pixelRatio + "\n",
 			"this.state.isVisible = " + this.state.isVisible
 		);
+		*/
 
 		if(this.state.isVisible) {
 			return this.props.children;

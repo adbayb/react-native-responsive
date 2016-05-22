@@ -10,7 +10,7 @@ class Service {
 	static eventType = "MediaQuery-OrientationChange";
 
 	//Device dimensions services:
-	
+
 	//En statique pour éviter des call répétitifs vers les getters Dimensions et PixelRatio:
 	static pixelRatio = PixelRatio.get();
 
@@ -30,8 +30,8 @@ class Service {
 	static dpDeviceWidth = Math.min(Dimensions.get("window").width, Dimensions.get("window").height);
 	static dpDeviceHeight = Math.max(Dimensions.get("window").width, Dimensions.get("window").height);
 	//Ici en px:
-	static pxDeviceWidth = Service.dpDeviceWidth * Service.pixelRatio;
-	static pxDeviceHeight = Service.dpDeviceHeight * Service.pixelRatio;
+	static pxDeviceWidth = Math.min(Dimensions.get("window").width, Dimensions.get("window").height) * PixelRatio.get();
+	static pxDeviceHeight = Math.max(Dimensions.get("window").width, Dimensions.get("window").height) * PixelRatio.get();
 
 	static isInInterval(x, min, max) {
 		if(x) {

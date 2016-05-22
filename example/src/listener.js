@@ -2,14 +2,12 @@ import React from "react";
 import {
 	View
 } from "react-native";
-import EventEmitter from "EventEmitter";
-import { Service } from "./api";
+import { Service, ProvideEventEmitter } from "./api";
 
+@ProvideEventEmitter
 class MediaQueryListener extends React.Component {
 	constructor(props) {
 		super(props);
-
-		this.eventEmitter = new EventEmitter();
 	}
 
 	onLayout(event) {
@@ -38,12 +36,33 @@ class MediaQueryListener extends React.Component {
 
 			//let event = new CustomEvent("toto");
 			//window.dispatchEvent(event);
-			Service.eventEmitter.emit(Service.eventType, orientation);
+			if(this.eventEmitter)
+				this.eventEmitter.emit(Service.eventType, orientation);
 		});
 		//console.log("Event", event.nativeEvent.layout);
 	}
 
 	render() {
+		/*
+		function Animal() {
+			this.owner = "Ayoub";
+			this.eat = function() {
+				console.log("Eating");
+			};
+		}
+
+		function Cat() {
+			this.meow = function() {
+				console.log("Meow !");
+			};
+		}
+		Cat.prototype = new Animal();
+		//Cat.prototype.test = true;
+		//Animal === Animal.prototype.constructor === constructor
+		console.log(Cat.prototype, new Cat());
+		//cf. https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/Object/prototype
+		*/
+
 		return(
 			<View {...this.props} onLayout={(event) => this.onLayout(event)}>
 				{this.props.children}
