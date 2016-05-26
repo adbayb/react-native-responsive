@@ -6,8 +6,7 @@ class PropTypes {
 				"Invalid prop '" + propName + "' supplied to '" +
 				componentName + "': A valid JSX element must be provided."
 			);
-		}
-		else {
+		} else {
 			//en javascript, un array est un aussi un object. typeof ne fait pas la distinction entre array et object, instanceof le permet:
 			if(props[propName] instanceof Array) {
 				return new Error(

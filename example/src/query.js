@@ -97,7 +97,7 @@ class MediaQuery extends React.Component {
 			"this.state.isVisible = " + this.state.isVisible
 		);
 		*/
-		
+
 		if(this.state.isVisible) {
 			return this.props.children;
 		}
