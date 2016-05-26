@@ -94,6 +94,9 @@ const InjectClass = (target) => {
 };
 */
 
+/*
+//Version sans utilisation de "Composant de Haut Niveau (HOC)": injection
+//des fonctions et variables nécessaires directement dans la classe cible:
 const ProvideEventEmitter = (target) => {
 	//childContextTypes doit être lié à la classe et non à l'objet (d'où le static en ES2015)
 	//En javascript, Une méthode statique est simplement une propriété définie dans la propriété constructor d'un Object
@@ -118,11 +121,89 @@ const ProvideEventEmitter = (target) => {
 
 const InjectEventEmitter = (target) => {
 	target.contextTypes = {
-		//Pas de required, dans le cas où MediaQuery est en standalone
-		//sans MediaQueryListener (i.e. pas d'event emitter fourni):
 		eventEmitter: React.PropTypes.object
 	};
 };
+*/
+
+//Utilisation de higher order component pour éviter les effets de bord possibles:
+const ProvideEventEmitter = (componentName, eventType) => {
+	return Target => class extends React.Component {
+		//displayName est une propriété statique utilisé par react native pour nommer un
+		//component lors d'un warning par exemple (par défaut, reprise du nom de la classe.
+		//Ici on le sette comme on fait appel à une classe anonyme):
+		static displayName = componentName;
+
+		static childContextTypes = {
+			eventEmitter: React.PropTypes.object.isRequired
+		};
+
+		constructor(props) {
+			super(props);
+			this.eventEmitter = new EventEmitter();
+		}
+
+		getChildContext() {
+			return {
+				eventEmitter: this.eventEmitter
+			};
+		}
+
+		dispatch(data) {
+			if(this.eventEmitter)
+				this.eventEmitter.emit(eventType, data);
+		}
+
+		render() {
+			return(
+				<Target {...this.props} dispatchEvent={this.dispatch.bind(this)} />
+			);
+		}
+	};
+};
+
+const InjectEventEmitter = (componentName, eventType) => {
+	return Target => class extends React.Component {
+		static displayName = componentName;
+
+		static contextTypes = {
+			//Pas de required, dans le cas où MediaQuery est en standalone
+			//sans MediaQueryListener (i.e. pas d'event emitter fourni):
+			eventEmitter: React.PropTypes.object
+		};
+
+		constructor(props) {
+			super(props);
+		}
+
+		/*Utilisation des évènements DOM pour la communication entre composants
+		(utile dans notre cas, pour éviter de boucler sur tous les enfants de listener en clonant l'élément
+		pour pouvoir lui attacher une prop permettant de spécifier la modification de l'orientation):
+		cf. https://facebook.github.io/react/tips/communicate-between-components.html*/
+		componentDidMount() {
+			//Sous ES5, on doit utiliser le mixin Subscriable. Cependant sous ES2015, les mixins ne sont pas supportés
+			//On doit donc gérer l'inscription sur notre event emitter injecté via le décorateur
+			//dans le cycle de vie de notre composant.
+			//cf. node_modules\react-native\Libraries\Components\Subscribable.js pour le raisonnement d'implémentation dans le lifecycle:
+			if(this.context.eventEmitter)
+				this.context.eventEmitter.addListener(eventType, this.refs["eventTarget"].onReceivedEvent);
+		}
+
+		componentWillUnmount() {
+			if(this.context.eventEmitter)
+				this.context.eventEmitter.removeAllListeners(eventType);
+		}
+
+		render() {
+			//Utilisation de ref pour pouvoir accéder aux
+			//fonctions du composant enfant depuis le parent (cf. componentDidMount()):
+			return(
+				<Target ref="eventTarget" {...this.props} />
+			);
+		}
+	};
+};
+
 
 export {
 	InjectEventEmitter,

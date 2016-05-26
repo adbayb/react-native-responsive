@@ -1,7 +1,7 @@
 import React from "react";
-import { Service, CustomPropTypes, InjectEventEmitter } from "./api";
+import { Helper, CustomPropTypes, InjectEventEmitter } from "./services";
 
-@InjectEventEmitter
+@InjectEventEmitter("MediaQueryWrapper", "MediaQueryEvent")
 class MediaQuery extends React.Component {
 	constructor(props) {
 		super(props);
@@ -15,32 +15,14 @@ class MediaQuery extends React.Component {
 			//Pour des examples de configurations Media Query suivant les appareils:
 			//cf. https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
 			isVisible: this.isValidDevice(
-				Service.pxDeviceWidth,
-				Service.pxDeviceHeight,
-				Service.pixelRatio
+				Helper.pxDeviceWidth,
+				Helper.pxDeviceHeight,
+				Helper.pixelRatio
 			)
 		};
 	}
 
-	/*Utilisation des évènements DOM pour la communication entre composants
-	(utile dans notre cas, pour éviter de boucler sur tous les enfants de listener en clonant l'élément
-	pour pouvoir lui attacher une prop permettant de spécifier la modification de l'orientation):
-	cf. https://facebook.github.io/react/tips/communicate-between-components.html*/
-	componentDidMount() {
-		//Sous ES5, on doit utiliser le mixin Subscriable. Cependant sous ES2015, les mixins ne sont pas supportés
-		//On doit donc gérer l'inscription sur notre event emitter injecté via le décorateur
-		//dans le cycle de vie de notre composant.
-		//cf. node_modules\react-native\Libraries\Components\Subscribable.js pour le raisonnement d'implémentation dans le lifecycle:
-		if(this.context.eventEmitter)
-			this.context.eventEmitter.addListener(Service.eventType, this.onOrientation);
-	}
-
-	componentWillUnmount() {
-		if(this.context.eventEmitter)
-			this.context.eventEmitter.removeAllListeners(Service.eventType);
-	}
-
-	onOrientation(orientation) {
+	onReceivedEvent(orientation) {
 		console.log("Query orientation", orientation);
 	}
 
@@ -64,7 +46,7 @@ class MediaQuery extends React.Component {
 			let max = this.props.maxDeviceWidth;
 
 			if(min || max)
-				return Service.isInInterval(width, min, max);
+				return Helper.isInInterval(width, min, max);
 		}
 
 		//Par défault, si aucune propriété width n'est spécifiée,
@@ -80,7 +62,7 @@ class MediaQuery extends React.Component {
 			let max = this.props.maxDeviceHeight;
 
 			if(min || max)
-				return Service.isInInterval(height, min, max);
+				return Helper.isInInterval(height, min, max);
 		}
 
 		return true;
@@ -94,7 +76,7 @@ class MediaQuery extends React.Component {
 			let max = this.props.maxPixelRatio;
 
 			if(min || max)
-				return Service.isInInterval(pixelRatio, min, max);
+				return Helper.isInInterval(pixelRatio, min, max);
 		}
 
 		return true;
@@ -115,7 +97,7 @@ class MediaQuery extends React.Component {
 			"this.state.isVisible = " + this.state.isVisible
 		);
 		*/
-
+		
 		if(this.state.isVisible) {
 			return this.props.children;
 		}
