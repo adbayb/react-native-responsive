@@ -1,7 +1,7 @@
 import MediaQuery from "./query.js";
-import MediaQueryListener from "./listener.js";
+import MediaQueryStore from "./store.js";
 
 export {
 	MediaQuery,
-	MediaQueryListener
+	MediaQueryStore
 };

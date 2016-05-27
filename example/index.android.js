@@ -10,13 +10,13 @@ import {
 	Text,
 	View
 } from "react-native";
-import { MediaQuery, MediaQueryListener } from "./src/index.js"; //MediaQueryStore?
+import { MediaQuery, MediaQueryStore } from "./src/index.js";
 
 class ReactNativeResponsive extends Component {
 	render() {
 		return(
-			<MediaQueryListener style={{flex: 1}}>
-				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080}>
+			<MediaQueryStore style={{flex: 1}}>
+				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080} orientation="portrait">
 					<View style={[styles.container, {backgroundColor: "blue"}]}>
 						<Text> Container 1 </Text>
 					</View>
@@ -26,12 +26,12 @@ class ReactNativeResponsive extends Component {
 						<Text> Container 2 </Text>
 					</View>
 				</MediaQuery>
-				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080}>
+				<MediaQuery style={styles.mediaquery} minDeviceWidth={200} maxDeviceWidth={1080} orientation="landscape">
 					<View style={[styles.container, {backgroundColor: "red"}]}>
 						<Text> Container 3 </Text>
 					</View>
 				</MediaQuery>
-			</MediaQueryListener>
+			</MediaQueryStore>
 		);
 	}
 }

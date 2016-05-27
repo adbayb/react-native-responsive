@@ -4,8 +4,13 @@ import {
 } from "react-native";
 import { Helper, ProvideEventEmitter } from "./services";
 
-@ProvideEventEmitter("MediaQueryListenerWrapper", "MediaQueryEvent")
-class MediaQueryListener extends React.Component {
+@ProvideEventEmitter("MediaQueryStoreWrapper", "MediaQueryEvent")
+class MediaQueryStore extends React.Component {
+	static propTypes = {
+		...View.propTypes,
+		dispatchEvent: React.PropTypes.func
+	};
+
 	constructor(props) {
 		super(props);
 	}
@@ -33,11 +38,15 @@ class MediaQueryListener extends React.Component {
 			height: event.nativeEvent.layout.height
 		}, () => {
 			let orientation = (this.state.width > Helper.dpDeviceWidth) ? "landscape" : "portrait";
-
+			
 			//let event = new CustomEvent("toto");
 			//window.dispatchEvent(event);
 			if(this.props.dispatchEvent)
-				this.props.dispatchEvent(orientation);
+				this.props.dispatchEvent({
+					orientation: orientation,
+					width: this.state.width * Helper.pixelRatio,
+					height: this.state.height * Helper.pixelRatio
+				});
 		});
 	}
 
@@ -92,9 +101,4 @@ class MediaQueryListener extends React.Component {
 	*/
 }
 
-MediaQueryListener.propTypes = {
-	...View.propTypes,
-	dispatchEvent: React.PropTypes.func
-};
-
-export default MediaQueryListener;
+export default MediaQueryStore;
