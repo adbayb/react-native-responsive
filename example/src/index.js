@@ -1,7 +1,7 @@
-import MediaQuery from "./query.js";
-import MediaQueryStore from "./store.js";
+import MediaQuery from "./query.component.js";
+import MediaQueryDecorator from "./query.decorator.js";
 
 export {
 	MediaQuery,
-	MediaQueryStore
+	MediaQueryDecorator
 };

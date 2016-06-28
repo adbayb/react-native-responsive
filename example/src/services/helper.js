@@ -45,8 +45,8 @@ class Helper {
 	}
 
 	/**
-	* Check if x === y or x >= min && x <= max:
-	**/
+	 * Check if x === y or x >= min && x <= max:
+	 **/
 	static isInIntervalOrEqual(x, y, min, max) {
 		//Les falsy values en Javascript correspondent à undefined, null, false, 0, ""...
 		//donc inutile de faire un call sur hasOwnProperty, il suffit simplement de
@@ -60,7 +60,7 @@ class Helper {
 			if(min || max)
 				return Helper.isInInterval(x, min, max);
 		}
-		
+
 		return false;
 	}
 
