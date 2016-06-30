@@ -1,8 +1,12 @@
 import React from "react";
 import { CustomPropTypes } from "./services";
-import MediaQueryBase from "./query.base.js";
+import Model from "./query.model.js";
 
-class MediaQuery extends React.Component {
+class Component extends React.Component {
+	//displayName est utilisé par react-native pour afficher les logs et warnings du composant
+	//par défault, il vaut le nom de la classe du composant:
+	static displayName = "MediaQuery";
+
 	//cf. https://developer.mozilla.org/fr/docs/Web/CSS/Media_queries#Pseudo-BNF_(pour_ceux_qui_aiment_ce_genre_de_choses)
 	//Pour des examples de configurations Media Query suivant les appareils:
 	//cf. https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
@@ -28,12 +32,12 @@ class MediaQuery extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.media = new MediaQueryBase(this.props);
+		this.model = new Model(this.props);
 		this.state = {
 			//deviceWidth: Helper.pxDeviceWidth,
 			//deviceHeight: Helper.pxDeviceHeight,
 			//devicePixelRatio: Helper.pixelRatio,
-			isVisible: this.media.isValidDevice()
+			isVisible: this.model.isValidDevice()
 		};
 	}
 
@@ -61,4 +65,4 @@ class MediaQuery extends React.Component {
 	}
 }
 
-export default MediaQuery;
+export default Component;

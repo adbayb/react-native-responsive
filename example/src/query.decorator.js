@@ -1,15 +1,15 @@
 import React from "react";
-import MediaQueryBase from "./query.base.js";
+import Model from "./query.model.js";
 
-const MediaQueryDecorator = (sizeConstraints) => {
+const Decorator = (sizeConstraints) => {
 	return Target => class extends React.Component {
 		static displayName = "MediaQueryDecorator";
 
 		constructor(props) {
 			super(props);
-			this.media = new MediaQueryBase(sizeConstraints);
+			this.model = new Model(sizeConstraints);
 			this.state = {
-				isVisible: this.media.isValidDevice()
+				isVisible: this.model.isValidDevice()
 			};
 		}
 
@@ -25,4 +25,4 @@ const MediaQueryDecorator = (sizeConstraints) => {
 	};
 };
 
-export default MediaQueryDecorator;
+export default Decorator;
