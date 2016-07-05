@@ -155,8 +155,8 @@ const ProvideEventEmitter = (componentName, eventType) => {
 		}
 
 		render() {
-			return(
-				<Target {...this.props} dispatchEvent={this.dispatch.bind(this)} />
+			return (
+				<Target {...this.props} dispatchEvent={this.dispatch.bind(this) } />
 			);
 		}
 	};
@@ -197,7 +197,7 @@ const InjectEventEmitter = (componentName, eventType) => {
 		render() {
 			//Utilisation de ref pour pouvoir accéder aux
 			//fonctions du composant enfant depuis le parent (cf. componentDidMount()):
-			return(
+			return (
 				<Target ref="eventTarget" {...this.props} />
 			);
 		}

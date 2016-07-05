@@ -1,19 +1,20 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet as RNStyleSheet } from "react-native";
 import Model from "./query.model.js";
 
-class MediaQueryStylesheet {
+class StyleSheet {
 	static create(stylesheet) {
 		if(stylesheet) {
 			let newStylesheet = {};
 			for(let property in stylesheet) {
 				if(/@media/.test(property)) {
-					if(MediaQueryStylesheet.isValidRule(property)) {
+					if(StyleSheet.isValidRule(property)) {
 						newStylesheet = Object.assign({}, newStylesheet, stylesheet[property]);
 					}
 				} else
 					newStylesheet[property] = stylesheet[property];
 			}
-
+			
+			//TODO: Return StyleSheet.create();
 			return newStylesheet;
 		}
 
@@ -27,7 +28,7 @@ class MediaQueryStylesheet {
 
 			let isValid = true;
 			while((matches = reg.exec(rule)) && isValid) {
-				isValid = MediaQueryStylesheet.isValidFeature(matches[1]);
+				isValid = StyleSheet.isValidFeature(matches[1]);
 			}
 
 			return isValid;
@@ -40,7 +41,7 @@ class MediaQueryStylesheet {
 		if(feature) {
 			//Suivant le type de feature (check sur la clé), affecter le validateur associé
 			//(pour le moment un seul validateur sur les propriétés taille):
-			return MediaQueryStylesheet.isValidSizeFeature(feature);
+			return StyleSheet.isValidSizeFeature(feature);
 		}
 
 		return false;
@@ -61,7 +62,7 @@ class MediaQueryStylesheet {
 			"min-device-pixel-ratio": testPixelRatio,
 			"max-device-pixel-ratio": testPixelRatio
 		};
-		let size = MediaQueryStylesheet.parseSizeFeature(feature);
+		let size = StyleSheet.parseSizeFeature(feature);
 
 		if(size)
 			return map[size.key](size.value);
@@ -156,7 +157,7 @@ class MediaQueryStylesheet {
 	}*/
 }
 
-export default MediaQueryStylesheet;
+export default StyleSheet;
 
 //Bouchons:
 function testWidth(width) {

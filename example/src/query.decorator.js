@@ -9,13 +9,13 @@ const Decorator = (sizeConstraints) => {
 			super(props);
 			this.model = new Model(sizeConstraints);
 			this.state = {
-				isVisible: this.model.isValidDevice()
+				isVisible: this.model.device.isValid()
 			};
 		}
 
 		render() {
 			if(this.state.isVisible) {
-				return(
+				return (
 					<Target {...this.props} />
 				);
 			}

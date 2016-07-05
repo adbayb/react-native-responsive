@@ -28,6 +28,16 @@ class Helper {
 	static pxDeviceWidth = Math.min(Dimensions.get("window").width, Dimensions.get("window").height) * PixelRatio.get();
 	static pxDeviceHeight = Math.max(Dimensions.get("window").width, Dimensions.get("window").height) * PixelRatio.get();
 
+	//Par défault, deviceWidth fait référence à pxDeviceWidth. 
+	//On peut donc y accéder soit via Helper.deviceWidth ou via Helper.pxDeviceWidth:
+	static get deviceWidth() {
+		return Helper.pxDeviceWidth;
+	}
+
+	static get deviceHeight() {
+		return Helper.pxDeviceHeight;
+	}
+
 	static isInInterval(x, min, max) {
 		if(x) {
 			if(min && max) {

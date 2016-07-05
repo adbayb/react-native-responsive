@@ -37,7 +37,7 @@ class Component extends React.Component {
 			//deviceWidth: Helper.pxDeviceWidth,
 			//deviceHeight: Helper.pxDeviceHeight,
 			//devicePixelRatio: Helper.pixelRatio,
-			isVisible: this.model.isValidDevice()
+			isVisible: this.model.device.isValid()
 		};
 	}
 

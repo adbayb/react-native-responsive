@@ -1,38 +1,38 @@
 {
-  "name": "react-native-responsive",
-  "version": "1.0.0",
-  "description": "A React Native module to manage responsive layouts more efficiently",
-  "main": "src/responsive.js",
-  "directories": {
-    "example": "example"
-  },
-  "scripts": {
-    "test": "npm run lint",
-    "lint": "eslint src"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ayoubdev/react-native-responsive.git"
-  },
-  "keywords": [
-    "react",
-    "react-native",
-    "responsive",
-    "responsive",
-    "design",
-    "layout",
-    "screen",
-    "size"
-  ],
-  "author": "Ayoub Adib <ayoub.development@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ayoubdev/react-native-responsive/issues"
-  },
-  "homepage": "https://github.com/ayoubdev/react-native-responsive#readme",
-  "devDependencies": {
-    "babel-eslint": "^6.0.4",
-    "eslint": "^2.8.0",
-    "eslint-plugin-react": "^5.0.1"
-  }
+	"name": "react-native-responsive",
+	"version": "1.0.0",
+	"description": "A React Native module to manage responsive layouts more efficiently",
+	"main": "src/responsive.js",
+	"directories": {
+		"example": "example"
+	},
+	"scripts": {
+		"test": "npm run lint",
+		"lint": "eslint src"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ayoubdev/react-native-responsive.git"
+	},
+	"keywords": [
+		"react",
+		"react-native",
+		"responsive",
+		"responsive",
+		"design",
+		"layout",
+		"screen",
+		"size"
+	],
+	"author": "Ayoub Adib <ayoub.development@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ayoubdev/react-native-responsive/issues"
+	},
+	"homepage": "https://github.com/ayoubdev/react-native-responsive#readme",
+	"devDependencies": {
+		"babel-eslint": "^6.0.4",
+		"eslint": "^2.8.0",
+		"eslint-plugin-react": "^5.0.1"
+	}
 }
