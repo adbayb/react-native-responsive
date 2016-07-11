@@ -1,5 +1,5 @@
 import React from "react";
-import Model from "./query.model.js";
+import { Device } from "./query.model.js";
 
 const Decorator = (sizeConstraints) => {
 	return Target => class extends React.Component {
@@ -7,9 +7,9 @@ const Decorator = (sizeConstraints) => {
 
 		constructor(props) {
 			super(props);
-			this.model = new Model(sizeConstraints);
+			this.device = new Device(sizeConstraints);
 			this.state = {
-				isVisible: this.model.device.isValid()
+				isVisible: this.device.isValid()
 			};
 		}
 

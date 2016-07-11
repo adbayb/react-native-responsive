@@ -2,7 +2,25 @@ import { Helper } from "./services";
 
 class Model {
 	constructor(expected) {
-		this.device = new Device(expected);
+		this.expected = expected;
+	}
+
+	static isInIntervalOrEqualFromOperator(operator, expected, actual) {
+		switch(operator) {
+			case "min": return Model.isInIntervalOrEqual(actual, null, expected);
+			case "max": return Model.isInIntervalOrEqual(actual, null, null, expected);
+			case "equal": return Model.isInIntervalOrEqual(actual, expected);
+			default: return true;
+		}
+	}
+
+	static isInIntervalOrEqual(val, valProp, minProp, maxProp) {
+		if(valProp || minProp || maxProp)
+			return Helper.isInIntervalOrEqual(val, valProp, minProp, maxProp);
+
+		//Par défault, si aucune propriété n'est spécifiée, on considère
+		//la valeur comme valide par défaut (pour permettre l'affichage des enfants):
+		return true;
 	}
 
 	/*
@@ -18,16 +36,12 @@ class Model {
 	console.log(instance.privateVariable); //=> undefined depuis l'extérieur (seulement accessible 
 	depuis l'intérieur de la classe via l'opérateur d'objet this)
 	*/
-	//On peut accéder à la variable device soit par this.model.device soit via this.model.Device
-	get Device() {
-		return this.device;
-	}
 }
 
-class Device {
+class Device extends Model {
 	//expected contiendra l'ensemble des contraintes spécifié par l'utilisateur soit via les props (composant) soit via un objet (dans le cas des décorateurs).
 	constructor(expected) {
-		this.expected = expected;
+		super(expected);
 	}
 
 	//VALIDATIONS DES CONTRAINTES DE TAILLES SPECIFIQUES AU HARDWARE (immutables):
@@ -48,34 +62,18 @@ class Device {
 	}
 
 	static isValidWidthFromOperator(operator, expectedWidth) {
-		return Device.isInIntervalOrEqualFromOperator(operator, expectedWidth);
+		return Device.isInIntervalOrEqualFromOperator(operator, expectedWidth, Helper.deviceWidth);
 	}
 
 	static isValidHeightFromOperator(operator, expectedHeight) {
-		return Device.isInIntervalOrEqualFromOperator(operator, expectedHeight);
+		return Device.isInIntervalOrEqualFromOperator(operator, expectedHeight, Helper.deviceHeight);
 	}
 
 	static isValidPixelRatioFromOperator(operator, expectedPixelRatio) {
-		return Device.isInIntervalOrEqualFromOperator(operator, expectedPixelRatio);
-	}
-
-	static isInIntervalOrEqualFromOperator(operator, expected, actual) {
-		switch(operator) {
-			case "min": return Model.isInIntervalOrEqual(actual, null, expected);
-			case "max": return Model.isInIntervalOrEqual(actual, null, null, expected);
-			case "equal": return Model.isInIntervalOrEqual(actual, expected);
-			default: return true;
-		}
-	}
-
-	static isInIntervalOrEqual(val, valProp, minProp, maxProp) {
-		if(valProp || minProp || maxProp)
-			return Helper.isInIntervalOrEqual(val, valProp, minProp, maxProp);
-
-		//Par défault, si aucune propriété n'est spécifiée, on considère
-		//la valeur comme valide par défaut (pour permettre l'affichage des enfants):
-		return true;
+		return Device.isInIntervalOrEqualFromOperator(operator, expectedPixelRatio, Helper.pixelRatio);
 	}
 }
 
-export default Model;
+export {
+	Device
+};

@@ -1,7 +1,26 @@
 import { StyleSheet as RNStyleSheet } from "react-native";
-import Model from "./query.model.js";
+import { Device } from "./query.model.js";
 
 class StyleSheet {
+	static featuresCheckers = {
+		//TODO: dans query.model.js créer fonction statique de vérification
+		//width et height avec un param du type "min", "max", "equal" pour effectuer
+		//l'opération de vérification adéquate
+		/*(width) => {
+			return Device.isValidWidthFromOperator("equal", width);
+		} est équivalent à (width) => Device.isValidWidthFromOperator("equal", width) 
+		(return implicite sur une expression)*/
+		"device-width": (w) => Device.isValidWidthFromOperator("equal", w),
+		"min-device-width": (w) => Device.isValidWidthFromOperator("min", w),
+		"max-device-width": (w) => Device.isValidWidthFromOperator("max", w),
+		"device-height": (h) => Device.isValidHeightFromOperator("equal", h),
+		"min-device-height": (h) => Device.isValidHeightFromOperator("min", h),
+		"max-device-height": (h) => Device.isValidHeightFromOperator("max", h),
+		"device-pixel-ratio": (pr) => Device.isValidPixelRatioFromOperator("equal", pr),
+		"min-device-pixel-ratio": (pr) => Device.isValidPixelRatioFromOperator("min", pr),
+		"max-device-pixel-ratio": (pr) => Device.isValidPixelRatioFromOperator("max", pr)
+	};
+
 	static create(stylesheet) {
 		if(stylesheet) {
 			let newStylesheet = {};
@@ -14,8 +33,7 @@ class StyleSheet {
 					newStylesheet[property] = stylesheet[property];
 			}
 			
-			//TODO: Return StyleSheet.create();
-			return newStylesheet;
+			return RNStyleSheet.create(newStylesheet);
 		}
 
 		return null;
@@ -48,24 +66,10 @@ class StyleSheet {
 	}
 
 	static isValidSizeFeature(feature) {
-		let map = {
-			//TODO: dans query.model.js créer fonction statique de vérification
-			//width et height avec un param du type "min", "max", "equal" pour effectuer
-			//l'opération de vérification adéquate
-			"device-width": testWidth,
-			"min-device-width": testWidth,
-			"max-device-width": testWidth,
-			"device-height": testHeight,
-			"min-device-height": testHeight,
-			"max-device-height": testHeight,
-			"device-pixel-ratio": testPixelRatio,
-			"min-device-pixel-ratio": testPixelRatio,
-			"max-device-pixel-ratio": testPixelRatio
-		};
 		let size = StyleSheet.parseSizeFeature(feature);
-
+		
 		if(size)
-			return map[size.key](size.value);
+			return StyleSheet.featuresCheckers[size.key](size.value);
 
 		return false;
 	}
@@ -159,24 +163,8 @@ class StyleSheet {
 
 export default StyleSheet;
 
-//Bouchons:
-function testWidth(width) {
-	//console.log("width");
-	return(width >= 100) ? true : false;
-}
-
-function testHeight(height) {
-	//console.log("height");
-	return(height >= 100) ? true : false;
-}
-
-function testPixelRatio(ratio) {
-	//console.log("ratio");
-	return(ratio === 1.5) ? true : false;
-}
-
 /*console.time("performance_test");
-let media = MediaQueryStylesheet.create({
+let media = StyleSheet.create({
 	test: {
 		width: "200"
 	},

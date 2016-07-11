@@ -1,6 +1,7 @@
 import React from "react";
 import { CustomPropTypes } from "./services";
-import Model from "./query.model.js";
+import { Device } from "./query.model.js";
+import Debug from "./query.debug.js";
 
 class Component extends React.Component {
 	//displayName est utilisé par react-native pour afficher les logs et warnings du composant
@@ -11,13 +12,13 @@ class Component extends React.Component {
 	//Pour des examples de configurations Media Query suivant les appareils:
 	//cf. https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
 	static propTypes = {
-		style: React.PropTypes.number,
 		/*children: React.PropTypes.oneOfType([
 			React.PropTypes.element
 			//MediaQuery n'est pas un container d'élément d'où le fait qu'il ne prend pas de tableau d'éléments:
 			//React.PropTypes.arrayOf(React.PropTypes.element)
 		]),*/
 		children: CustomPropTypes.childrenValidator,
+		debug: React.PropTypes.bool,
 		//Hardware Device Constraints:
 		deviceWidth: React.PropTypes.number,
 		minDeviceWidth: React.PropTypes.number,
@@ -30,14 +31,18 @@ class Component extends React.Component {
 		maxPixelRatio: React.PropTypes.number
 	};
 
+	static defaultProps = {
+		debug: false
+	}
+
 	constructor(props) {
 		super(props);
-		this.model = new Model(this.props);
+		this.device = new Device(this.props);
 		this.state = {
 			//deviceWidth: Helper.pxDeviceWidth,
 			//deviceHeight: Helper.pxDeviceHeight,
 			//devicePixelRatio: Helper.pixelRatio,
-			isVisible: this.model.device.isValid()
+			isVisible: this.device.isValid()
 		};
 	}
 
@@ -58,8 +63,16 @@ class Component extends React.Component {
 		*/
 		//console.log("RENDER");
 		if(this.state.isVisible) {
-			return this.props.children;
+			if(!this.props.debug)
+				return this.props.children;
+			else
+				return (
+					<Debug>
+						{this.props.children}
+					</Debug>
+				);
 		}
+
 		//Retourner null est une indication explicite à React de ne rien afficher:
 		return null;
 	}
