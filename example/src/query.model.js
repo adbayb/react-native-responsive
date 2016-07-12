@@ -44,6 +44,26 @@ class Device extends Model {
 		super(expected);
 	}
 
+	debug(identifierName) {
+		console.log(
+			`📱 DEVICE LOGS for ${identifierName}:\n`,
+			`	👉 📱 Device Width (px): ${Helper.deviceWidth} px\n`,
+			`	👉 📱 Device Height (px): ${Helper.deviceHeight} px\n`,
+			`	👉 📱 Device Width (dp): ${Helper.dpDeviceWidth} dp\n`,
+			`	👉 📱 Device Height (dp): ${Helper.dpDeviceHeight} dp\n`,
+			`	👉 📱 Device Pixel Ratio: ${Helper.pixelRatio}\n\n`,
+			`	👉 📱 props.deviceWidth: ${this.expected.deviceWidth} px\n`,
+			`	👉 📱 props.minDeviceWidth: ${this.expected.minDeviceWidth} px\n`,
+			`	👉 📱 props.maxDeviceWidth: ${this.expected.maxDeviceWidth} px\n`,
+			`	👉 📱 props.deviceHeight: ${this.expected.deviceHeight} px\n`,
+			`	👉 📱 props.minDeviceHeight: ${this.expected.minDeviceHeight} px\n`,
+			`	👉 📱 props.maxDeviceHeight: ${this.expected.maxDeviceHeight} px\n`,
+			`	👉 📱 props.pixelRatio: ${this.expected.pixelRatio}\n`,
+			`	👉 📱 props.minPixelRatio: ${this.expected.minPixelRatio}\n`,
+			`	👉 📱 props.maxPixelRatio: ${this.expected.maxPixelRatio}\n`,
+		);
+	}
+
 	//VALIDATIONS DES CONTRAINTES DE TAILLES SPECIFIQUES AU HARDWARE (immutables):
 	isValid() {
 		return this.isValidWidth(this.expected) && this.isValidHeight(this.expected) && this.isValidPixelRatio(this.expected);
@@ -71,6 +91,16 @@ class Device extends Model {
 
 	static isValidPixelRatioFromOperator(operator, expectedPixelRatio) {
 		return Device.isInIntervalOrEqualFromOperator(operator, expectedPixelRatio, Helper.pixelRatio);
+	}
+
+	static get information() {
+		return [
+			`👉 📱 Device Width (px): ${Helper.deviceWidth} px`,
+			`👉 📱 Device Height (px): ${Helper.deviceHeight} px`,
+			`👉 📱 Device Width (dp): ${Helper.dpDeviceWidth} dp`,
+			`👉 📱 Device Height (dp): ${Helper.dpDeviceHeight} dp`,
+			`👉 📱 Device Pixel Ratio: ${Helper.pixelRatio}`
+		];
 	}
 }
 

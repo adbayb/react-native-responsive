@@ -24,6 +24,7 @@ class StyleSheet {
 	static create(stylesheet) {
 		if(stylesheet) {
 			let newStylesheet = {};
+
 			for(let property in stylesheet) {
 				if(/@media/.test(property)) {
 					if(StyleSheet.isValidRule(property)) {
@@ -32,7 +33,7 @@ class StyleSheet {
 				} else
 					newStylesheet[property] = stylesheet[property];
 			}
-			
+
 			return RNStyleSheet.create(newStylesheet);
 		}
 
@@ -67,7 +68,7 @@ class StyleSheet {
 
 	static isValidSizeFeature(feature) {
 		let size = StyleSheet.parseSizeFeature(feature);
-		
+
 		if(size)
 			return StyleSheet.featuresCheckers[size.key](size.value);
 
@@ -92,6 +93,13 @@ class StyleSheet {
 		//(cf. https://developer.mozilla.org/fr/docs/Web/CSS/Media_queries)
 		return str.replace(/-([a-z])/gi, (match, group1) => {
 			return group1.toUpperCase();
+		});
+	}
+
+	static debug() {
+		console.log("📱 DEVICE LOGS for MediaQueryStyleSheet:\n");
+		Device.information.map((data) => {
+			console.log("	" + data);
 		});
 	}
 

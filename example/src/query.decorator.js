@@ -1,8 +1,8 @@
 import React from "react";
 import { Device } from "./query.model.js";
 
-const Decorator = (sizeConstraints) => {
-	return Target => class extends React.Component {
+const Decorator = (sizeConstraints, debug) => {
+	return Target => class DecoratorComponent extends React.Component {
 		static displayName = "MediaQueryDecorator";
 
 		constructor(props) {
@@ -13,12 +13,16 @@ const Decorator = (sizeConstraints) => {
 			};
 		}
 
+		componentDidMount() {
+			if(debug)
+				this.device.debug(DecoratorComponent.displayName);
+		}
+
 		render() {
-			if(this.state.isVisible) {
+			if(this.state.isVisible) 
 				return (
 					<Target {...this.props} />
 				);
-			}
 
 			return null;
 		}

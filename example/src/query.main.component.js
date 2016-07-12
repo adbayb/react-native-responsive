@@ -1,9 +1,8 @@
 import React from "react";
 import { CustomPropTypes } from "./services";
 import { Device } from "./query.model.js";
-import Debug from "./query.debug.js";
 
-class Component extends React.Component {
+class MainComponent extends React.Component {
 	//displayName est utilisé par react-native pour afficher les logs et warnings du composant
 	//par défault, il vaut le nom de la classe du composant:
 	static displayName = "MediaQuery";
@@ -33,7 +32,7 @@ class Component extends React.Component {
 
 	static defaultProps = {
 		debug: false
-	}
+	};
 
 	constructor(props) {
 		super(props);
@@ -46,36 +45,19 @@ class Component extends React.Component {
 		};
 	}
 
-	render() {
-		/*
-		console.log(this);
-		console.log(
-			"render()\n",
-			"this.props.minDeviceWidth = " + this.props.minDeviceWidth + "\n",
-			"this.props.maxDeviceWidth = " + this.props.maxDeviceWidth + "\n",
-			"this.props.minDeviceHeight = " + this.props.minDeviceHeight + "\n",
-			"this.props.maxDeviceHeight = " + this.props.maxDeviceHeight + "\n",
-			"pxDeviceWidth = " + Service.pxDeviceWidth + "\n",
-			"pxDeviceHeight = " + Service.pxDeviceHeight + "\n",
-			"pixelRatio = " + Service.pixelRatio + "\n",
-			"this.state.isVisible = " + this.state.isVisible
-		);
-		*/
-		//console.log("RENDER");
-		if(this.state.isVisible) {
-			if(!this.props.debug)
-				return this.props.children;
-			else
-				return (
-					<Debug>
-						{this.props.children}
-					</Debug>
-				);
-		}
+	componentDidMount() {
+		//Inutile de faire l'affichage du debug Device à chaque render() 
+		//étant donné que les propriétés hardware sont immutables:
+		if(this.props.debug)
+			this.device.debug(MainComponent.displayName);
+	}
 
+	render() {
+		if(this.state.isVisible) 
+			return this.props.children;
 		//Retourner null est une indication explicite à React de ne rien afficher:
 		return null;
 	}
 }
 
-export default Component;
+export default MainComponent;

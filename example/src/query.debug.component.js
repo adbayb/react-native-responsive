@@ -6,12 +6,13 @@ import {
 	View,
 	Text
 } from "react-native";
+import { Device } from "./query.model.js";
 
-class Debug extends Component {
+class DebugComponent extends Component {
 	static displayName = "MediaQueryDebug";
 
 	static propTypes = {
-		children: PropTypes.node
+		...View.propTypes
 	};
 
 	constructor(props) {
@@ -20,12 +21,11 @@ class Debug extends Component {
 
 	render() {
 		return (
-			<View style={{ flex: 1 }}>
-				<Text> TOTO </Text>
-				{this.props.children}
+			<View {...this.props}>
+				{ Device.information.map((data, key) => <Text key={key}> {data} </Text>) }
 			</View>
 		);
 	}
 }
 
-export default Debug;
+export default DebugComponent;

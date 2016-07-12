@@ -10,15 +10,13 @@ import {
 	View
 } from "react-native";
 import Test from "./test.component";
-import { MediaQuery, MediaQueryStylesheet } from "./src/index.js";
-import Debug from "./src/query.debug.js";
+import { MediaQuery, MediaQueryStylesheet, MediaQueryDebug } from "./src/index.js";
 
 class ReactNativeResponsive extends Component {
 	render() {
-		console.log(styles);
-
 		return (
 			<View style={{ flex: 1 }}>
+				<MediaQueryDebug style={{backgroundColor: "white"}} />
 				<MediaQuery debug={true} minDeviceWidth={200} maxDeviceWidth={1080}>
 					<View style={[styles.container, { backgroundColor: "blue" }]}>
 						<Text> Container 1 </Text>
@@ -60,7 +58,7 @@ const styles = MediaQueryStylesheet.create({
 	},
 	"@media (device-width: 1080) and (device-height: 1794) and (device-pixel-ratio: 2.625)": {
 		mediaQuery: {
-			flex: 3,
+			flex: 1,
 			justifyContent: "center",
 			alignItems: "center",
 			backgroundColor: "purple"
@@ -74,6 +72,8 @@ const styles = MediaQueryStylesheet.create({
 			backgroundColor: "yellow"
 		}
 	}
-});
+}, true);
+
+MediaQueryStylesheet.debug();
 
 AppRegistry.registerComponent("ReactNativeResponsive", () => ReactNativeResponsive);
