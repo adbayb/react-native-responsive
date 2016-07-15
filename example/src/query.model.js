@@ -47,10 +47,10 @@ class Device extends Model {
 	debug(identifierName) {
 		console.log(
 			`📱 DEVICE LOGS for ${identifierName}:\n`,
-			`	👉 📱 Device Width (px): ${Helper.deviceWidth} px\n`,
-			`	👉 📱 Device Height (px): ${Helper.deviceHeight} px\n`,
-			`	👉 📱 Device Width (dp): ${Helper.dpDeviceWidth} dp\n`,
-			`	👉 📱 Device Height (dp): ${Helper.dpDeviceHeight} dp\n`,
+			`	👉 📱 Device Width (css pixels): ${Helper.deviceWidth} dip\n`,
+			`	👉 📱 Device Height (css pixels): ${Helper.deviceHeight} dip\n`,
+			`	👉 📱 Device Width (physical pixels): ${Helper.physicalDeviceWidth} px\n`,
+			`	👉 📱 Device Height (physical pixels): ${Helper.physicalDeviceHeight} px\n`,
 			`	👉 📱 Device Pixel Ratio: ${Helper.pixelRatio}\n\n`,
 			`	👉 📱 props.deviceWidth: ${this.expected.deviceWidth} px\n`,
 			`	👉 📱 props.minDeviceWidth: ${this.expected.minDeviceWidth} px\n`,
@@ -95,10 +95,10 @@ class Device extends Model {
 
 	static get information() {
 		return [
-			`👉 📱 Device Width (px): ${Helper.deviceWidth} px`,
-			`👉 📱 Device Height (px): ${Helper.deviceHeight} px`,
-			`👉 📱 Device Width (dp): ${Helper.dpDeviceWidth} dp`,
-			`👉 📱 Device Height (dp): ${Helper.dpDeviceHeight} dp`,
+			`👉 📱 Device Width (css pixels): ${Helper.deviceWidth} dip`,
+			`👉 📱 Device Height (css pixels): ${Helper.deviceHeight} dip`,
+			`👉 📱 Device Width (physical pixels): ${Helper.physicalDeviceWidth} px`,
+			`👉 📱 Device Height (physical pixels): ${Helper.physicalDeviceHeight} px`,
 			`👉 📱 Device Pixel Ratio: ${Helper.pixelRatio}`
 		];
 	}

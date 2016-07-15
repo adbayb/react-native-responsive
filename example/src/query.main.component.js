@@ -19,6 +19,7 @@ class MainComponent extends React.Component {
 		children: CustomPropTypes.childrenValidator,
 		debug: React.PropTypes.bool,
 		//Hardware Device Constraints:
+		//In css pixels:
 		deviceWidth: React.PropTypes.number,
 		minDeviceWidth: React.PropTypes.number,
 		maxDeviceWidth: React.PropTypes.number,
@@ -53,7 +54,7 @@ class MainComponent extends React.Component {
 	}
 
 	render() {
-		if(this.state.isVisible) 
+		if(this.state.isVisible)
 			return this.props.children;
 		//Retourner null est une indication explicite à React de ne rien afficher:
 		return null;

@@ -1,4 +1,4 @@
-import ListFragment from "./list.js";
+import ListFragment from "./list.view.js";
 import DetailFragment from "./detail.js";
 
 export {

@@ -11,7 +11,7 @@ import {
 	StyleSheet
 } from "react-native";
 
-class Row extends Component {
+class ListItem extends Component {
 	static propTypes = {
 		children: PropTypes.node,
 		title: PropTypes.string.isRequired,
@@ -51,14 +51,14 @@ class Row extends Component {
 		//TouchableNativeFeedback seulement supporté par Android !
 		if(Platform.OS === "android")
 			return (
-				<TouchableNativeFeedback onPress={() => this.onClick()}>
-					{this.renderItem()}
+				<TouchableNativeFeedback onPress={() => this.onClick() }>
+					{this.renderItem() }
 				</TouchableNativeFeedback>
 			);
-		
+
 		return (
-			<TouchableHighlight onPress={() => this.onClick()}>
-				{this.renderItem()}
+			<TouchableHighlight onPress={() => this.onClick() }>
+				{this.renderItem() }
 			</TouchableHighlight>
 		);
 	}
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default Row;
+export default ListItem;

@@ -12,7 +12,8 @@ class DebugComponent extends Component {
 	static displayName = "MediaQueryDebug";
 
 	static propTypes = {
-		...View.propTypes
+		...View.propTypes,
+		...Text.propTypes
 	};
 
 	constructor(props) {
@@ -20,9 +21,14 @@ class DebugComponent extends Component {
 	}
 
 	render() {
+		let {
+			styleText,
+			...others
+		} = this.props;
+
 		return (
-			<View {...this.props}>
-				{ Device.information.map((data, key) => <Text key={key}> {data} </Text>) }
+			<View {...others}>
+				{ Device.information.map((data, key) => <Text key={key} style={styleText}> {data} </Text>) }
 			</View>
 		);
 	}
