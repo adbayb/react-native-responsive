@@ -3,7 +3,7 @@ import {
 	Text,
 	View
 } from "react-native";
-import { MediaQueryDecorator } from "./src/index.js";
+import { MediaQueryDecorator } from "../src";
 
 @MediaQueryDecorator({
 	minDeviceWidth: 0,

@@ -14,7 +14,7 @@ import {
 	ListFragment,
 	DetailFragment
 } from "./components";
-import listData from "./data.js";
+import listData from "./data";
 
 class ReactNativeResponsive extends Component {
 	constructor(props) {
