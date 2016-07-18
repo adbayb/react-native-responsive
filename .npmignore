@@ -1,3 +1,9 @@
 # Ignore example (demo app) folder:
 
 example
+
+# Ignore some dev configs:
+
+.jsbeautifyrc
+.tern-project
+.eslintrc.json
