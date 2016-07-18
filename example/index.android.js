@@ -1,19 +1,21 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
-import React, { Component } from "react";
+import React, {
+	Component
+} from "react";
 import {
 	AppRegistry,
 	View,
 	Text
 } from "react-native";
-import { MediaQuery, MediaQueryStylesheet, MediaQueryDebug } from "./src";
+import { 
+	MediaQuery, 
+	MediaQueryStylesheet, 
+	MediaQueryDebug 
+} from "react-native-responsive";
 import {
 	ListFragment,
 	DetailFragment
 } from "./components";
+import Test from "./components/test.js";
 import listData from "./data";
 
 class ReactNativeResponsive extends Component {
@@ -38,6 +40,7 @@ class ReactNativeResponsive extends Component {
 					<Text style={styles.text}> {this.state.rowData.subtitle} </Text>
 					<Text style={styles.text}> {this.state.rowData.title} </Text>
 					<Text style={styles.text}> {this.state.rowData.description} </Text>
+					<Test />
 					<MediaQuery debug={true} maxDeviceWidth={599}>
 						<View style={{ marginTop: 10 }}>
 							<Text> SMARTPHONE MEDIA QUERY DEBUG: </Text>

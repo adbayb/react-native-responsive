@@ -1,17 +1,13 @@
 {
-	"name": "ReactNativeResponsiveSamples",
-	"version": "0.0.1",
-	"private": true,
-	"scripts": {
-		"start": "node node_modules/react-native/local-cli/cli.js start"
-	},
-	"dependencies": {
-		"react": "^0.14.8",
-		"react-native": "^0.25.1"
-	},
-	"devDependencies": {
-		"babel-plugin-transform-decorators-legacy": "^1.3.4",
-		"eslint": "^3.0.0",
-		"eslint-plugin-react": "^5.2.2"
-	}
+  "name": "ReactNativeResponsive",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "cli": "node node_modules/react-native/local-cli/cli.js"
+  },
+  "dependencies": {
+    "react": "15.2.1",
+    "react-native": "0.29.2"
+  }
 }

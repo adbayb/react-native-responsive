@@ -1,38 +1,55 @@
 {
-	"name": "react-native-responsive",
-	"version": "1.0.0",
-	"description": "A React Native module to manage responsive layouts more efficiently",
-	"main": "src/responsive.js",
-	"directories": {
-		"example": "example"
-	},
-	"scripts": {
-		"test": "npm run lint",
-		"lint": "eslint src"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/ayoubdev/react-native-responsive.git"
-	},
-	"keywords": [
-		"react",
-		"react-native",
-		"responsive",
-		"responsive",
-		"design",
-		"layout",
-		"screen",
-		"size"
-	],
-	"author": "Ayoub Adib <ayoub.development@gmail.com>",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/ayoubdev/react-native-responsive/issues"
-	},
-	"homepage": "https://github.com/ayoubdev/react-native-responsive#readme",
-	"devDependencies": {
-		"babel-eslint": "^6.0.4",
-		"eslint": "^2.8.0",
-		"eslint-plugin-react": "^5.0.1"
-	}
+  "name": "react-native-responsive",
+  "version": "1.0.0",
+  "description": "A React Native module to manage responsive layouts more efficiently",
+  "main": "lib/index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "npm run lint",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayoubdev/react-native-responsive.git"
+  },
+  "keywords": [
+    "react",
+    "react-native",
+    "responsive",
+    "responsive",
+    "design",
+    "media-query",
+    "media",
+    "query",
+    "layout",
+    "css",
+    "scss",
+    "less",
+    "sass",
+    "jsx",
+    "js",
+    "screen",
+    "size",
+    "ayoub",
+    "adib"
+  ],
+  "author": "Ayoub Adib <ayoub.development@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ayoubdev/react-native-responsive/issues"
+  },
+  "homepage": "https://github.com/ayoubdev/react-native-responsive#readme",
+  "peerDependencies": {
+    "react-native": ">=0.25.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.1.0",
+    "eslint-plugin-react": "^5.2.2"
+  },
+  "dependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.3.4"
+  }
 }
