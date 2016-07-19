@@ -6,16 +6,14 @@ import {
 	View,
 	Text
 } from "react-native";
-import { 
-	MediaQuery, 
-	MediaQueryStylesheet, 
-	MediaQueryDebug 
+import {
+	MediaQueryStylesheet
 } from "react-native-responsive";
 import {
 	ListFragment,
 	DetailFragment
 } from "./components";
-import Test from "./components/test.js";
+import Debug from "./components/debug.js";
 import listData from "./data";
 
 class ReactNativeResponsive extends Component {
@@ -40,19 +38,8 @@ class ReactNativeResponsive extends Component {
 					<Text style={styles.text}> {this.state.rowData.subtitle} </Text>
 					<Text style={styles.text}> {this.state.rowData.title} </Text>
 					<Text style={styles.text}> {this.state.rowData.description} </Text>
-					<Test />
-					<MediaQuery debug={true} maxDeviceWidth={599}>
-						<View style={{ marginTop: 10 }}>
-							<Text> SMARTPHONE MEDIA QUERY DEBUG: </Text>
-							<MediaQueryDebug styleText={{ fontSize: 10 }}/>
-						</View>
-					</MediaQuery>
-					<MediaQuery minDeviceWidth={600}>
-						<View style={{ marginTop: 40 }}>
-							<Text> TABLET MEDIA QUERY DEBUG: </Text>
-							<MediaQueryDebug styleText={{ fontSize: 10 }}/>
-						</View>
-					</MediaQuery>
+
+					<Debug consoleDebug={true}/>
 				</DetailFragment>
 			</View>
 		);

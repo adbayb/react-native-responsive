@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/ayoubdev/react-native-responsive#readme",
   "peerDependencies": {
-    "react-native": ">=0.20.0"
+    "react-native": ">=0.25.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
