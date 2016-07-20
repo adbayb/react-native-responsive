@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-    "test": "npm run lint",
+    "test": "mocha test --compilers js:babel-core/register",
     "lint": "eslint src"
   },
   "repository": {
@@ -45,9 +45,13 @@
     "react-native": ">=0.25.0"
   },
   "devDependencies": {
+    "babel-core": "^6.11.4",
     "babel-eslint": "^6.1.2",
+    "babel-preset-es2015": "^6.9.0",
+    "chai": "^3.5.0",
     "eslint": "^3.1.0",
-    "eslint-plugin-react": "^5.2.2"
+    "eslint-plugin-react": "^5.2.2",
+    "mocha": "^2.5.3"
   },
   "dependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4"

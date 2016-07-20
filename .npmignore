@@ -7,3 +7,5 @@ example
 .jsbeautifyrc
 .tern-project
 .eslintrc.json
+# .babelrc used for mocha es2015 test (thus for dev not necessary for prod):
+.babelrc
