@@ -1,6 +1,7 @@
 # Ignore example (demo app) folder:
 
 example
+test
 
 # Ignore some dev configs:
 
