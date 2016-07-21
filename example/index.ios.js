@@ -7,7 +7,7 @@ import {
 	Text
 } from "react-native";
 import {
-	MediaQueryStylesheet
+	MediaQueryStyleSheet
 } from "react-native-responsive";
 import {
 	ListFragment,
@@ -46,7 +46,7 @@ class ReactNativeResponsive extends Component {
 	}
 }
 
-const styles = MediaQueryStylesheet.create({
+const styles = MediaQueryStyleSheet.create({
 	container: {
 		flex: 1,
 		flexDirection: "column"

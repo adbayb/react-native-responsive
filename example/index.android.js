@@ -7,7 +7,7 @@ import {
 	Text
 } from "react-native";
 import {
-	MediaQueryStylesheet
+	MediaQueryStyleSheet
 } from "react-native-responsive";
 import {
 	ListFragment,
@@ -46,7 +46,7 @@ class ReactNativeResponsive extends Component {
 	}
 }
 
-const styles = MediaQueryStylesheet.create({
+const styles = MediaQueryStyleSheet.create({
 	//cf. some media device width/height breakpoints to distinguish between tablet/smartphone...:
 	//http://www.onlinedesignteacher.com/2015/01/css3-media-queries-for-responsive_81.html
 
