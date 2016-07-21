@@ -72,8 +72,7 @@ describe('ClassName', function() {
 
 			//SHOULD assertion style, exemples:
 			//should a seulement 3 apis d'assertions: equal, throw, exist (et leur négation: .not.equal...)
-			console.log(should.equal);
-			test.should.equal(false);
+			test.should.equal(true);
 		});
 	});
 });
