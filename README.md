@@ -130,11 +130,12 @@ For this:
 
 #### Apis
 
-> **`MediaQueryStyleSheet.create(baseStylesObject, mediaRulesObject);`** <br/>
+**`MediaQueryStyleSheet.create(baseStylesObject, mediaRulesObject);`** <br/>
 > It's similar to React Native StyleSheet.create(obj) api except that it takes one more argument: <br/>
 > mediaRulesObject (*optional*) stores media query rules as keys (corresponding styles are affected as values). <br/>
 > Rules are written like regular css media query rules.<br/><br/>
-> **`MediaQueryStyleSheet.debug();`** <br/>
+
+**`MediaQueryStyleSheet.debug();`** <br/>
 > Enables console debugging.<br/><br/>
 
 <br/><br/><br/><br/>
@@ -273,7 +274,7 @@ You must take in account this while writing your media rules. For example, for a
 
 TODO: component props + screenshot debug
 
-**Important note concerning debug size outputs:**
+**Important note concerning size debugging outputs:**
 
 On Android, a device can have screen decoration (such as a navigation bar) along the edges of the display that reduce the amount of application space available from the size returned here.
 React Native Responsive computes device constraints accordingly to window available space and not to hardware screen size (due to React Native Dimensions api).
