@@ -131,10 +131,12 @@ For this:
 #### Apis
 
 - [x] `MediaQueryStyleSheet.create(baseStylesObject, mediaRulesObject);`
+
 > It's similar to React Native StyleSheet.create(obj) api except that it takes one more argument: <br/>
 > mediaRulesObject (*optional*) stores media query rules as keys (corresponding styles are affected as values). <br/>
 > Rules are written like regular css media query rules.
 - [x] `MediaQueryStyleSheet.debug();`
+
 > Enables console debugging.
 
 <br/><br/><br/><br/>
