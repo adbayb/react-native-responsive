@@ -130,14 +130,12 @@ For this:
 
 #### Apis
 
-- [x] `MediaQueryStyleSheet.create(baseStylesObject, mediaRulesObject);`
-
+> **`MediaQueryStyleSheet.create(baseStylesObject, mediaRulesObject);`** <br/>
 > It's similar to React Native StyleSheet.create(obj) api except that it takes one more argument: <br/>
 > mediaRulesObject (*optional*) stores media query rules as keys (corresponding styles are affected as values). <br/>
-> Rules are written like regular css media query rules.
-- [x] `MediaQueryStyleSheet.debug();`
-
-> Enables console debugging.
+> Rules are written like regular css media query rules.<br/><br/>
+> **`MediaQueryStyleSheet.debug();`** <br/>
+> Enables console debugging.<br/><br/>
 
 <br/><br/><br/><br/>
 
@@ -273,12 +271,24 @@ You must take in account this while writing your media rules. For example, for a
 
 ### Debug Component
 
-TODO: deviceWidth and deviceHeight must take in account status bar and button bar sizes + screenshot debug
+TODO: component props + screenshot debug
+
+**Important note concerning debug size outputs:**
+
+On Android, a device can have screen decoration (such as a navigation bar) along the edges of the display that reduce the amount of application space available from the size returned here.
+React Native Responsive computes device constraints accordingly to window available space and not to hardware screen size (due to React Native Dimensions api).
+
+For example, a LG Nexus 5 has:
+```
+Hardware view = 640 x 360 dp
+Content view = 592 x 360 dp (due to 48 dp of navigation bar)
+```
 
 <br/>
 
 ### TODOs
 
+- [x] Replace React Native Dimensions.get("window") api (dependent from initial orientation screen) by a custom ios/android native module independent from initial device orientation 
 - [x] Add more features:
 	- Orientation (needs to create android and ios orientation event handler native dependencies)
 	- Platform ios/android (checks from React Native Platform api)
