@@ -1,4 +1,0 @@
-import {
-	expect
-} from "chai";
-

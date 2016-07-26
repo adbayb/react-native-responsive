@@ -59,13 +59,13 @@ const styles = MediaQueryStyleSheet.create({
 		flex: 3
 	},
 	overview: {
-		flex: 1,
 		padding: 10,
 		backgroundColor: "lightgrey"
 	},
 	text: {
 		fontWeight: "bold"
-	},
+	}
+}, {
 	//Smartphone media breakpoint:
 	//Attention: le css pixel spécifié correspond au dpi hardware du device - navigation bar dip 
 	//Mais l'api Dimensions de react-native récupère le width et height en fonction de l'orientation du device.
@@ -76,33 +76,29 @@ const styles = MediaQueryStyleSheet.create({
 	//statiques du device (device, height) + si possible orientation event callback)
 	"@media (min-device-width: 320)": {
 		container: {
-			flex: 1,
 			flexDirection: "column"
 		},
 		list: {
 			flex: 2
 		},
 		overview: {
-			flex: 1,
-			padding: 10,
-			backgroundColor: "lightgrey"
+			flex: 1
 		}
 	},
 	//Tablet media breakpoint:
 	"@media (min-device-width: 600)": {
 		container: {
-			flex: 1,
 			flexDirection: "row"
 		},
 		list: {
 			flex: 1
 		},
 		overview: {
-			flex: 2,
-			padding: 10,
-			backgroundColor: "lightgrey"
+			flex: 2
 		}
 	}
 });
+
+MediaQueryStyleSheet.debug();
 
 AppRegistry.registerComponent("ReactNativeResponsive", () => ReactNativeResponsive);

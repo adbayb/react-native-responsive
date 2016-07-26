@@ -33,7 +33,12 @@ class Debug extends React.Component {
 				</MediaQuery>
 				<MediaQuery minDeviceWidth={600}>
 					<View style={{ marginTop: 40 }}>
-						<Text> TABLET MEDIA QUERY DEBUG: </Text>
+						<MediaQuery minDeviceWidth={1280}>
+							<Text> DESKTOP MEDIA QUERY DEBUG: </Text>
+						</MediaQuery>
+						<MediaQuery maxDeviceWidth={1279}>
+							<Text> TABLET MEDIA QUERY DEBUG: </Text>
+						</MediaQuery>
 						<MediaQueryDebug styleText={{ fontSize: 10 }}/>
 					</View>
 				</MediaQuery>

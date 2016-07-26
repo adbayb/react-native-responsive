@@ -55,39 +55,33 @@ const styles = MediaQueryStyleSheet.create({
 		flex: 3
 	},
 	overview: {
-		flex: 1,
 		padding: 10,
 		backgroundColor: "lightgrey"
 	},
 	text: {
 		fontWeight: "bold"
-	},
+	}
+}, {
 	"@media (min-device-width: 320)": {
 		container: {
-			flex: 1,
 			flexDirection: "column"
 		},
 		list: {
 			flex: 2
 		},
 		overview: {
-			flex: 1,
-			padding: 10,
-			backgroundColor: "lightgrey"
+			flex: 1
 		}
 	},
 	"@media (min-device-width: 600)": {
 		container: {
-			flex: 1,
 			flexDirection: "row"
 		},
 		list: {
 			flex: 1
 		},
 		overview: {
-			flex: 2,
-			padding: 10,
-			backgroundColor: "lightgrey"
+			flex: 2
 		}
 	}
 });
