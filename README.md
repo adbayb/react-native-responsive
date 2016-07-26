@@ -7,14 +7,14 @@ This library allows you to manage layouts between different sizes and displays: 
 A set of apis, components and decorators helps you to implement and build responsive applications easily and as fast as possible. 
 
 
-#**TODO: Screenshot gif**
+**TODO: Screenshot gif**
 
 <br/>
 
 ## Table of Contents
 
 - [Installation](#installation)
-- [How to use it ?](#how-to-use-it)
+- [General Usage](#general-usage)
 	* [Introduction](#introduction)
 	* [MediaQuery](#mediaquery-component-approach)
 		* [Props](#props)
@@ -49,13 +49,13 @@ A set of apis, components and decorators helps you to implement and build respon
 
 <br/><br/><br/><br/>
 
-## How to use it ?
+## General Usage
 
 <br/>
 
 ### Introduction
 
-Before anything, some definitions:
+Before anything else, some definitions:
 - [x] Responsive Design is the practice of using tools to progressively enhance a content for different viewing contexts
 - [x] Media Query is a CSS tool to help adapting content rendering following conditions
 
@@ -104,7 +104,7 @@ In order to allow Babel transpiler to parse decorator syntax, you need to enable
 For this:
 - [x] Go to your root project folder
 - [x] If not, create `.babelrc` file
-- [x] Add the following line to your `.babelrc` file:
+- [x] Add the following lines to your `.babelrc` file:
 ```
 {
 	"extends": "react-native/packager/react-packager/rn-babelrc.json",
@@ -130,12 +130,11 @@ For this:
 
 #### Apis
 
-> `MediaQueryStyleSheet.create(baseStylesObject, mediaRulesObject);` <br/><br/>
+- [x] `MediaQueryStyleSheet.create(baseStylesObject, mediaRulesObject);`
 > It's similar to React Native StyleSheet.create(obj) api except that it takes one more argument: <br/>
 > mediaRulesObject (*optional*) stores media query rules as keys (corresponding styles are affected as values). <br/>
 > Rules are written like regular css media query rules.
-
-> `MediaQueryStyleSheet.debug();` <br/><br/>
+- [x] `MediaQueryStyleSheet.debug();`
 > Enables console debugging.
 
 <br/><br/><br/><br/>
@@ -248,7 +247,7 @@ To build and test this demo, just follow these steps:
 
 #### Screenshot output
 
-#TODO Screenshot.
+TODO Screenshot.
 
 <br/><br/><br/><br/>
 
@@ -262,7 +261,7 @@ All Media Queries (like all React Native Css properties) are expressed in CSS pi
 
 Typically:
 ```
-cssPixel = hardwarePixel / pixelRatio
+cssPixel (in dip/dp) = hardwarePixel (in px) / pixelRatio
 ```
 You must take in account this while writing your media rules. For example, for a device with a width of 1920 pixels, a height of 1080 pixels and a pixel ratio of 3, you would write instead 640 dp (=1920/3) for width and 360 dp (=1080/3) for height.
 
@@ -272,7 +271,7 @@ You must take in account this while writing your media rules. For example, for a
 
 ### Debug Component
 
-#TODO: deviceWidth and deviceHeight must take in account status bar and button bar sizes
+TODO: deviceWidth and deviceHeight must take in account status bar and button bar sizes + screenshot debug
 
 <br/>
 
