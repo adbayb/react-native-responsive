@@ -99,6 +99,4 @@ const styles = MediaQueryStyleSheet.create({
 	}
 });
 
-MediaQueryStyleSheet.debug();
-
 AppRegistry.registerComponent("ReactNativeResponsive", () => ReactNativeResponsive);
