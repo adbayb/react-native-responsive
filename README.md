@@ -8,7 +8,9 @@ A set of apis, components and decorators helps you to implement and build respon
 
 <br/>
 
-![Demonstration Application](https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif)
+<p align="center">
+	<img src="https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif" title="Demonstration Application" alt="Demonstration Application"/>
+</p>
 
 *For more details, see [Demonstration Application Documentation](#demonstration-application) || For corresponding code, see [Demonstration Application Source Code](example)*
 
@@ -271,7 +273,9 @@ Here's different layouts managed by React Native Responsive module (Nexus 5 smar
 
 *For corresponding code, see [Source Code](example)*
 
-![Demonstration Application](https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif)
+<p align="center">
+	<img src="https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif" title="Demonstration Application" alt="Demonstration Application"/>
+</p>
 
 <br/><br/><br/><br/>
 
@@ -313,7 +317,9 @@ const Example = (props) => {
 
 #### Output Example
 
-![Debug Component](https://cloud.githubusercontent.com/assets/10498826/17178139/868a846a-5414-11e6-910b-53ff70a2726c.png)
+<p align="center">
+	<img src="https://cloud.githubusercontent.com/assets/10498826/17178139/868a846a-5414-11e6-910b-53ff70a2726c.png" title="MediaQueryDebug Output" alt="MediaQueryDebug Output"/>
+</p>
 
 #### Important note concerning size debugging outputs
 
