@@ -45,6 +45,6 @@ class Debug extends React.Component {
 			</View>
 		);
 	}
-};
+}
 
 export default Debug;

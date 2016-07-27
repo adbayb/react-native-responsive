@@ -2,14 +2,17 @@
 
 <br/>
 
-The power of Media Queries now in your React Native project !<br/>
+The power of Media Queries now in your React Native project (ios and android) !<br/>
 This library allows you to manage layouts between different sizes and displays: responsive design .<br/>
 A set of apis, components and decorators helps you to implement and build responsive applications easily and as fast as possible. 
 
-
-**TODO: Screenshot gif**
-
 <br/>
+
+![Demonstration Application](https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif)
+
+*For more details, see [Demonstration Application Documentation](#demonstration-application) || For corresponding code, see [Demonstration Application Source Code](example)*
+
+<br/><br/>
 
 ## Table of Contents
 
@@ -23,12 +26,16 @@ A set of apis, components and decorators helps you to implement and build respon
 		* [Valid Object Keys](#valid-object-keys)
 	* [MediaQueryStyleSheet](#mediaquerystylesheet-functional-api-approach)
 		* [Apis](#apis)
+		* [Valid Media Features Keys](#valid-media-features-keys)
 - [Examples](#examples)
 	* [Practical Use Case](#practical-use-case)
 	* [Demonstration Application](#demonstration-application)
 - [Misc](#misc)
 	* [Unit Of Measurement](#unit-of-measurement)
-	* [Debug Component](#debug-component)
+	* [Debug Component](#mediaquerydebug-debug-component)
+		* [Props](#props)
+		* [Output Example](#output-example)
+		* [Important Note](#important-note-concerning-size-debugging-outputs)
 	* [TODOs](#todos)
 - [License](#license)
 
@@ -80,9 +87,9 @@ Given it component nature, you can nest it and do all the normal things that you
 > **deviceHeight** number *optional* <br/>Describes the height of the rendering surface of the output device.<br/><br/>
 > **minDeviceHeight** number *optional* <br/>Describes the minimum height of the rendering surface of the output device.<br/><br/>
 > **maxDeviceHeight** number *optional* <br/>Describes the maximum height of the rendering surface of the output device.<br/><br/>
-> **pixelRatio** number *optional* <br/>Describes the resolution in physical pixels per CSS pixel.<br/><br/>
-> **minPixelRatio** number *optional* <br/>Describes the minimum resolution in physical pixels per CSS pixel.<br/><br/>
-> **maxPixelRatio** number *optional* <br/>Describes the maximum resolution in physical pixels per CSS pixel.<br/><br/>
+> **devicePixelRatio** number *optional* <br/>Describes the resolution in physical pixels per CSS pixel.<br/><br/>
+> **minDevicePixelRatio** number *optional* <br/>Describes the minimum resolution in physical pixels per CSS pixel.<br/><br/>
+> **maxDevicePixelRatio** number *optional* <br/>Describes the maximum resolution in physical pixels per CSS pixel.<br/><br/>
 > **debug** boolean *optional, default = false* <br/>Enables console debugging.<br/><br/>
 
 <br/>
@@ -120,9 +127,9 @@ For this:
 > **deviceHeight** number *optional* <br/>Describes the height of the rendering surface of the output device.<br/><br/>
 > **minDeviceHeight** number *optional* <br/>Describes the minimum height of the rendering surface of the output device.<br/><br/>
 > **maxDeviceHeight** number *optional* <br/>Describes the maximum height of the rendering surface of the output device.<br/><br/>
-> **pixelRatio** number *optional* <br/>Describes the resolution in physical pixels per CSS pixel.<br/><br/>
-> **minPixelRatio** number *optional* <br/>Describes the minimum resolution in physical pixels per CSS pixel.<br/><br/>
-> **maxPixelRatio** number *optional* <br/>Describes the maximum resolution in physical pixels per CSS pixel.<br/><br/>
+> **devicePixelRatio** number *optional* <br/>Describes the resolution in physical pixels per CSS pixel.<br/><br/>
+> **minDevicePixelRatio** number *optional* <br/>Describes the minimum resolution in physical pixels per CSS pixel.<br/><br/>
+> **maxDevicePixelRatio** number *optional* <br/>Describes the maximum resolution in physical pixels per CSS pixel.<br/><br/>
 
 <br/>
 
@@ -137,6 +144,18 @@ For this:
 
 **`MediaQueryStyleSheet.debug();`** <br/>
 > Enables console debugging.<br/><br/>
+
+#### Valid Media Features Keys
+
+> **device-width** number *optional* <br/>Describes the width of the rendering surface of the output device.<br/><br/>
+> **min-device-width** number *optional* <br/>Describes the minimum width of the rendering surface of the output device.<br/><br/>
+> **max-device-width** number *optional* <br/>Describes the maximum width of the rendering surface of the output device.<br/><br/>
+> **device-height** number *optional* <br/>Describes the height of the rendering surface of the output device.<br/><br/>
+> **min-device-height** number *optional* <br/>Describes the minimum height of the rendering surface of the output device.<br/><br/>
+> **max-device-height** number *optional* <br/>Describes the maximum height of the rendering surface of the output device.<br/><br/>
+> **device-pixel-ratio** number *optional* <br/>Describes the resolution in physical pixels per CSS pixel.<br/><br/>
+> **min-device-pixel-ratio** number *optional* <br/>Describes the minimum resolution in physical pixels per CSS pixel.<br/><br/>
+> **max-device-pixel-ratio** number *optional* <br/>Describes the maximum resolution in physical pixels per CSS pixel.<br/><br/>
 
 <br/><br/><br/><br/>
 
@@ -248,7 +267,11 @@ To build and test this demo, just follow these steps:
 
 #### Screenshot output
 
-TODO Screenshot.
+Here's different layouts managed by React Native Responsive module (Nexus 5 smartphone vs Nexus 10 tablet):
+
+*For corresponding code, see [Source Code](example)*
+
+![Demonstration Application](https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif)
 
 <br/><br/><br/><br/>
 
@@ -270,11 +293,29 @@ You must take in account this while writing your media rules. For example, for a
 
 <br/>
 
-### Debug Component
+### MediaQueryDebug (Debug Component)
 
-TODO: component props + screenshot debug
+If you want some information regarding to hardware specifications of your device, there is a component dedicated to this: **MediaQueryDebug**:
+```jsx
+import { MediaQueryDebug } from "react-native-responsive";
 
-**Important note concerning size debugging outputs:**
+const Example = (props) => {
+	return (
+		<MediaQueryDebug style={{ flex: 1 }} styleText={{ fontSize: 10 }}/>
+	);
+};
+```
+
+#### Props
+
+> [View props...](https://facebook.github.io/react-native/docs/view.html#props)<br/><br/>
+> **styleText** object *optional* <br/>Customizes text debugging styles.<br/><br/>
+
+#### Output Example
+
+![Debug Component](https://cloud.githubusercontent.com/assets/10498826/17178139/868a846a-5414-11e6-910b-53ff70a2726c.png)
+
+#### Important note concerning size debugging outputs
 
 On Android, a device can have screen decoration (such as a navigation bar) along the edges of the display that reduce the amount of application space available from the size returned here.
 React Native Responsive computes device constraints accordingly to window available space and not to hardware screen size (due to React Native Dimensions api).
