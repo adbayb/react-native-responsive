@@ -8,9 +8,7 @@ A set of apis, components and decorators helps you to implement and build respon
 
 <br/>
 
-<p align="center">
-	<img src="https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif" title="Demonstration Application" alt="Demonstration Application"/>
-</p>
+![Demonstration Application](https://cloud.githubusercontent.com/assets/10498826/17181797/9f0b9404-5421-11e6-80d3-3b1cbdcf5c6b.gif)
 
 *For more details, see [Demonstration Application Documentation](#demonstration-application) || For corresponding code, see [Demonstration Application Source Code](example)*
 
@@ -273,9 +271,7 @@ Here's different layouts managed by React Native Responsive module (Nexus 5 smar
 
 *For corresponding code, see [Source Code](example)*
 
-<p align="center">
-	<img src="https://cloud.githubusercontent.com/assets/10498826/17179826/daece04c-541a-11e6-9077-0a0ce704edaf.gif" title="Demonstration Application" alt="Demonstration Application"/>
-</p>
+![Demonstration Application](https://cloud.githubusercontent.com/assets/10498826/17181797/9f0b9404-5421-11e6-80d3-3b1cbdcf5c6b.gif)
 
 <br/><br/><br/><br/>
 
