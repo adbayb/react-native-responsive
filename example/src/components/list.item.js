@@ -17,11 +17,6 @@ class ListItem extends Component {
 		title: PropTypes.string.isRequired,
 		subtitle: PropTypes.string,
 		onClick: PropTypes.func
-		//Props spécifiques à l'api ListView: cf. https://facebook.github.io/react-native/docs/listview.html#renderrow
-		//Utile pour utiliser renderSeparator et manager le design du séparateur de la row sélectionnée via adjacentRowHighlighted:
-		//sectionID: PropTypes.string,
-		//rowID: PropTypes.string,
-		//highlightRow: PropTypes.func
 	};
 
 	constructor(props) {
@@ -29,7 +24,6 @@ class ListItem extends Component {
 	}
 
 	onClick() {
-		//this.props.highlightRow(this.props.sectionID, this.props.rowID);
 		this.props.onClick();
 	}
 
@@ -48,7 +42,6 @@ class ListItem extends Component {
 	}
 
 	render() {
-		//TouchableNativeFeedback seulement supporté par Android !
 		if(Platform.OS === "android")
 			return (
 				<TouchableNativeFeedback onPress={() => this.onClick() }>

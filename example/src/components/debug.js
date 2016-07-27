@@ -9,8 +9,6 @@ import {
 	MediaQueryDecorator
 } from "react-native-responsive";
 
-//Limitation MediaQueryDecorator HOC aux smartphones et tablettes (>= 1280 <=> desktop/ wide screen desktop)
-//cf. http://www.onlinedesignteacher.com/2015/01/css3-media-queries-for-responsive_81.html
 @MediaQueryDecorator({
 	maxDeviceWidth: 1280
 }, true)

@@ -36,7 +36,7 @@ describe("StyleSheetUtil", function() {
 				padding: 0,
 				margin: 0
 			};
-			//equal seul compare deux valeurs strictement (===: pour deux objets, cela vérifie qu'ils ont la même référence mémoire). Pour effectuer une comparaison de façon nested et sur les valeurs, il faut utiliser deep.equal ou .eql:
+			
 			expect(StyleSheetUtil.merge(target, source)).to.be.eql(expected);
 		});
 	});
@@ -48,6 +48,7 @@ describe("StyleSheetUtil", function() {
 				key: "min-device-width",
 				value: 540
 			};
+			
 			expect(StyleSheetUtil.parseSizeFeature(actual)).to.be.eql(expected);
 		});
 	});
@@ -55,6 +56,7 @@ describe("StyleSheetUtil", function() {
 	describe("#parseSizeFeature(feature)", () => {
 		it("should return null when size feature doesn't match requirements", () => {
 			let actual = "min-device-width: test";
+			
 			expect(StyleSheetUtil.parseSizeFeature(actual)).to.be.null;
 		});
 	});
