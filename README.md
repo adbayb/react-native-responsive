@@ -3,7 +3,7 @@
 <br/>
 
 The power of Media Queries now in your React Native project (ios and android) !<br/>
-This library allows you to manage layouts between different sizes and displays: responsive design .<br/>
+This library allows you to manage layouts between different sizes and displays: Responsive Design can now be easily managed.<br/>
 A set of apis, components and decorators helps you to implement and build responsive applications easily and as fast as possible. 
 
 <br/>
