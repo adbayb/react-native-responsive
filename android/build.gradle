@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        //Récupération des dépendences depuis les repositories suivants 
+        //(si un fail, le suivant prend le relai dans le fetch data):
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0'
+    }
+}
+
+/*
+//apply plugin: 'android'
+On applique le plugin android-library puisque react-native a besoin du package aar 
+de chaque plugin native incorporé dans le projet pour builder l'application
+cf. documentation android pour la définition d'une librarie:
+An Android library is structurally the same as an Android app module. It can include everything 
+needed to build an app, including source code, resource files, and an Android manifest. However, 
+instead of compiling into an APK that runs on a device, an Android library compiles into an 
+Android Archive (AAR) file that you can use as a dependency for an Android app module.
+*/
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 'android-23'
+    buildToolsVersion '23.0.3'
+
+    defaultConfig {
+        minSdkVersion 16
+        //targetSdkVersion n'a aucun impact sur la compilation: c'est juste un indicateur 
+        //pour montrer sur quel sdk (ici 23 => ANDROID 6.0) l'application a été testée:
+        targetSdkVersion 23
+    }
+
+    buildTypes {
+        release {
+            runProguard false
+            proguardFile getDefaultProguardFile('proguard-android.txt')
+        }
+    }
+}
+
+repositories {
+    //Définition comme premier repo un maven local pour récupérer les 
+    //dépendances react-native depuis le projet du user (./folder_app/node_modules/react-native/android)
+    //Si fail, récupération des dépendances depuis jcenter (mais les aars react-native 
+    //ne sont pas à jour sur jcenter(), d'où le fait de passer par un la définition d'un repo local):
+    maven { url "$projectDir/../../react-native/android" }
+    jcenter()
+}
+
+dependencies {
+    compile 'com.facebook.react:react-native:+'
+}
