@@ -15,6 +15,9 @@ import {
 import Debug from "./components/debug.js";
 import listData from "./data";
 
+
+import { NativeModules } from "react-native";
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -24,6 +27,9 @@ class App extends Component {
 	}
 
 	onListClick(rowData) {
+		NativeModules.DeviceData.test();
+		NativeModules.DeviceData.get();
+		
 		this.setState({
 			rowData: rowData
 		});

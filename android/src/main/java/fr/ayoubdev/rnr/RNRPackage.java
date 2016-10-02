@@ -9,6 +9,7 @@ import fr.ayoubdev.rnr.modules.DeviceData;
 import fr.ayoubdev.rnr.modules.OrientationManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -25,11 +26,11 @@ public class RNRPackage implements ReactPackage {
 
 	@Override
 	public List<Class<? extends JavaScriptModule>> createJSModules() {
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
 	public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-		return null;
+		return Collections.emptyList();
 	}
 }
