@@ -32,21 +32,18 @@ android {
         //pour montrer sur quel sdk (ici 23 => ANDROID 6.0) l'application a été testée:
         targetSdkVersion 23
     }
-
-    buildTypes {
-        release {
-            runProguard false
-            proguardFile getDefaultProguardFile('proguard-android.txt')
-        }
-    }
 }
 
 repositories {
-    //Définition comme premier repo un maven local pour récupérer les 
+    //Définition des repositories depuis lesquelles les dépendences seront downloadées:
+    //Définition comme premier repo Maven un local permettant d'assurer le développement
+    //au sein du dossier react-native-responsive depuis la devDependencie react-native contenant l'aar RN:
+    maven { url "$projectDir/../node_modules/react-native/android" }
+    //Définition comme deuxième repo Maven un local pour récupérer les 
     //dépendances react-native depuis le projet du user (./folder_app/node_modules/react-native/android)
+    maven { url "$projectDir/../../react-native/android" }
     //Si fail, récupération des dépendances depuis jcenter (mais les aars react-native 
     //ne sont pas à jour sur jcenter(), d'où le fait de passer par un la définition d'un repo local):
-    maven { url "$projectDir/../../react-native/android" }
     jcenter()
 }
 
