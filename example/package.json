@@ -5,11 +5,11 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "cli": "node node_modules/react-native/local-cli/cli.js",
-	"clean": "rimraf ./node_modules/react-native-responsive",
+    "clean": "rimraf ./node_modules/react-native-responsive",
     "dev:watch": "babel-node ./bin/watch.js",
     "dev:packager": "node node_modules/react-native/local-cli/cli.js start --root ./node_modules/react-native-responsive",
     "dev": "concurrently \"npm run dev:watch\" \"npm run dev:packager\"",
-	"deploy:android": "npm run clean && npm install react-native-responsive && npm run cli run-android"
+    "deploy:android": "npm run clean && npm install react-native-responsive && npm run cli run-android"
   },
   "dependencies": {
     "react": "^15.3.2",

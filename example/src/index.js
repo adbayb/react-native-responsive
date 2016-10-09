@@ -27,8 +27,11 @@ class App extends Component {
 	}
 
 	onListClick(rowData) {
-		NativeModules.DeviceData.test();
-		NativeModules.DeviceData.get();
+		NativeModules.DeviceData.getScreenResolution((width, height) => {
+			console.log("Ayoub getScreenResolution() Success", width, height);
+		}, (err) => {
+			console.log("Ayoub getScreenResolution() Error", err);
+		});
 		
 		this.setState({
 			rowData: rowData
