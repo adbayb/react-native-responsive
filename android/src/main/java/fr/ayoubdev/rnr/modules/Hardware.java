@@ -3,20 +3,20 @@ package fr.ayoubdev.rnr.modules;
 
 import android.graphics.Point;
 import android.view.Display;
-import android.view.WindowManager;
-import com.facebook.react.bridge.*;
-import fr.ayoubdev.rnr.exceptions.DeviceException;
-import fr.ayoubdev.rnr.helpers.DeviceHelper;
+import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+import com.facebook.react.bridge.ReactMethod;
+import fr.ayoubdev.rnr.exceptions.HardwareException;
+import fr.ayoubdev.rnr.helpers.Helper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import static android.content.Context.WINDOW_SERVICE;
-
-public class DeviceData extends ReactContextBaseJavaModule {
+public class Hardware extends ReactContextBaseJavaModule {
 	private ReactApplicationContext context;
 
-	public DeviceData(ReactApplicationContext reactContext) {
+	public Hardware(ReactApplicationContext reactContext) {
 		super(reactContext);
 
 		this.context = reactContext;
@@ -24,7 +24,7 @@ public class DeviceData extends ReactContextBaseJavaModule {
 
 	@Override
 	public String getName() {
-		return "DeviceData";
+		return "Hardware";
 	}
 
 	/*According to React Native documentation:
@@ -38,39 +38,49 @@ public class DeviceData extends ReactContextBaseJavaModule {
 	public void getScreenResolution(Callback onSuccess, Callback onError) {//in pixel
 		//L'api Dimensions.get de RN est dépendant de l'orientation, d'où la réimplémentation de la fonction:
 		Point realSize;
-		WindowManager windowManager = (WindowManager) this.context.getSystemService(WINDOW_SERVICE);
+		Display display = Helper.getDisplay(this.context);
 
-		if(windowManager != null) {
+		if(display != null) {
 			if(android.os.Build.VERSION.SDK_INT >= 17)
-				realSize = this.getRealSize(windowManager);
+				realSize = this.getRealSize(display);
 			else {
 				try {
-					realSize = this.getLegacyRealSize(windowManager);
-				} catch(DeviceException e) {
+					realSize = this.getLegacyRealSize(display);
+				} catch(HardwareException e) {
 					realSize = new Point();
-					windowManager.getDefaultDisplay().getSize(realSize);
+					display.getSize(realSize);
 				}
 			}
 
 			if(realSize != null) {
-				Point resolution = DeviceHelper.computeScreenResolution(realSize);
+				Point resolution = Helper.computeScreenResolution(realSize);
 				//return (width, height) function to js via native bridge:
 				onSuccess.invoke(resolution.x, resolution.y);
-			}
-			else
-				onError.invoke("DeviceData.class.getScreenResolution: Something goes wrong (realSize == null)");
-		}
-		else
-			onError.invoke("DeviceData.class.getScreenResolution: Something goes wrong (windowsManager == null)");
+			} else
+				onError.invoke("Hardware.class.getScreenResolution: Something goes wrong (realSize == null)");
+		} else
+			onError.invoke("Hardware.class.getScreenResolution: Something goes wrong (windowsManager == null)");
 
 		return;
 	}
 
-	private Point getRealSize(WindowManager windowManager) {
-		if(windowManager != null) {
-			Point size = new Point();
+	@ReactMethod
+	public void getOrientation(Callback onSuccess, Callback onError) {
+		Display display = Helper.getDisplay(this.context);
 
-			windowManager.getDefaultDisplay().getRealSize(size);
+		if(display != null) {
+			final int rotation = display.getRotation();
+			onSuccess.invoke(Helper.getOrientationFromRotation(rotation));
+		} else
+			onError.invoke("Hardware.class.getOrientation: Something goes wrong (windowsManager == null)");
+
+		return;
+	}
+
+	private Point getRealSize(Display display) {
+		if(display != null) {
+			Point size = new Point();
+			display.getRealSize(size);
 
 			return size;
 		}
@@ -78,8 +88,8 @@ public class DeviceData extends ReactContextBaseJavaModule {
 		return null;
 	}
 
-	private Point getLegacyRealSize(WindowManager windowManager) throws DeviceException {
-		if(windowManager != null) {
+	private Point getLegacyRealSize(Display oDisplay) throws HardwareException {
+		if(oDisplay != null) {
 			//getRealSize function is not accessible from android api < 17
 			//By using reflection we can isolate some interesting functions from android.support.v13.view.Display
 			//class that are only accessible during runtime (reflection allows developer to discover all attributes
@@ -94,22 +104,21 @@ public class DeviceData extends ReactContextBaseJavaModule {
 			try {
 				//Display class:
 				Class<? extends Display> cDisplay = Display.class;
-				//Display Object:
-				Display oDisplay = windowManager.getDefaultDisplay();
+				//Display Object = oDisplay
 				//Get adequat Methods via reflection:
 				Method getRawHeight = cDisplay.getMethod("getRawHeight");
 				Method getRawWidth = cDisplay.getMethod("getRawWidth");
 
 				return new Point(
-					(Integer) getRawWidth.invoke(oDisplay),
-					(Integer) getRawHeight.invoke(oDisplay)
+						(Integer) getRawWidth.invoke(oDisplay),
+						(Integer) getRawHeight.invoke(oDisplay)
 				);
 			} catch(NoSuchMethodException e) {
-				throw new DeviceException("getLegacyRealSize() NoSuchMethodException");
+				throw new HardwareException("getLegacyRealSize() NoSuchMethodException");
 			} catch(IllegalAccessException e) {
-				throw new DeviceException("getLegacyRealSize() IllegalAccessException");
+				throw new HardwareException("getLegacyRealSize() IllegalAccessException");
 			} catch(InvocationTargetException e) {
-				throw new DeviceException("getLegacyRealSize() InvocationTargetException");
+				throw new HardwareException("getLegacyRealSize() InvocationTargetException");
 			}
 		}
 

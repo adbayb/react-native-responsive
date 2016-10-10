@@ -16,7 +16,7 @@ import Debug from "./components/debug.js";
 import listData from "./data";
 
 
-import { NativeModules } from "react-native";
+import { NativeModules, DeviceEventEmitter } from "react-native";
 
 class App extends Component {
 	constructor(props) {
@@ -26,13 +26,24 @@ class App extends Component {
 		};
 	}
 
+	componentWillMount() {
+		DeviceEventEmitter.addListener("OrientationListener", (event) => {
+			console.log("Ayoub DeviceEventEmitter", event, event.orientation);
+		});
+	}
+
 	onListClick(rowData) {
-		NativeModules.DeviceData.getScreenResolution((width, height) => {
+		NativeModules.Hardware.getScreenResolution((width, height) => {
 			console.log("Ayoub getScreenResolution() Success", width, height);
 		}, (err) => {
 			console.log("Ayoub getScreenResolution() Error", err);
 		});
-		
+		NativeModules.Hardware.getOrientation((orientation) => {
+			console.log("Ayoub getOrientation() Success", orientation);
+		}, (err) => {
+			console.log("Ayoub getOrientation() Error", err);
+		});
+
 		this.setState({
 			rowData: rowData
 		});
@@ -41,13 +52,13 @@ class App extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<ListFragment style={styles.list} data={listData} onClick={this.onListClick.bind(this) }/>
+				<ListFragment style={styles.list} data={listData} onClick={this.onListClick.bind(this)} />
 				<DetailFragment style={styles.overview} empty={Object.keys(this.state.rowData).length <= 0}>
 					<Text style={styles.text}> {this.state.rowData.subtitle} </Text>
 					<Text style={styles.text}> {this.state.rowData.title} </Text>
 					<Text style={styles.text}> {this.state.rowData.description} </Text>
 
-					<Debug consoleDebug={true}/>
+					<Debug consoleDebug={true} />
 				</DetailFragment>
 			</View>
 		);
@@ -70,30 +81,30 @@ const styles = MediaQueryStyleSheet.create({
 		fontWeight: "bold"
 	}
 }, {
-	//Smartphone breakpoint:
-	"@media (min-device-width: 320)": {
-		container: {
-			flexDirection: "column"
+		//Smartphone breakpoint:
+		"@media (min-device-width: 320)": {
+			container: {
+				flexDirection: "column"
+			},
+			list: {
+				flex: 2
+			},
+			overview: {
+				flex: 1
+			}
 		},
-		list: {
-			flex: 2
-		},
-		overview: {
-			flex: 1
+		//Tablet breakpoint:
+		"@media (min-device-width: 600)": {
+			container: {
+				flexDirection: "row"
+			},
+			list: {
+				flex: 1
+			},
+			overview: {
+				flex: 2
+			}
 		}
-	},
-	//Tablet breakpoint:
-	"@media (min-device-width: 600)": {
-		container: {
-			flexDirection: "row"
-		},
-		list: {
-			flex: 1
-		},
-		overview: {
-			flex: 2
-		}
-	}
-});
+	});
 
 export default App;

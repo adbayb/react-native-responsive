@@ -5,8 +5,8 @@ import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
-import fr.ayoubdev.rnr.modules.DeviceData;
-import fr.ayoubdev.rnr.modules.OrientationManager;
+import fr.ayoubdev.rnr.modules.Hardware;
+import fr.ayoubdev.rnr.modules.OrientationListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,8 +18,8 @@ public class RNRPackage implements ReactPackage {
 	public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
 		List<NativeModule> modules = new ArrayList<>();
 
-		modules.add(new DeviceData(reactContext));
-		modules.add(new OrientationManager(reactContext));
+		modules.add(new Hardware(reactContext));
+		modules.add(new OrientationListener(reactContext));
 
 		return modules;
 	}
