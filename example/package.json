@@ -12,16 +12,16 @@
     "deploy:android": "npm run clean && npm install react-native-responsive && npm run cli run-android"
   },
   "dependencies": {
-    "react": "^15.3.2",
-    "react-native": "^0.34.1",
+    "react": "^15.4.1",
+    "react-native": "^0.39.0",
     "react-native-responsive": "../"
   },
   "devDependencies": {
-    "babel-cli": "^6.16.0",
-    "concurrently": "^3.0.0",
-    "fs-extra": "^0.30.0",
+    "babel-cli": "^6.18.0",
+    "concurrently": "^3.1.0",
+    "fs-extra": "^1.0.0",
     "minimatch": "^3.0.3",
-    "node-watch": "^0.4.0",
+    "node-watch": "^0.4.1",
     "rimraf": "^2.5.4"
   }
 }
