@@ -1,4 +1,4 @@
-package fr.ayoubdev.rnr.modules;
+package fr.aybadb.rnr.modules;
 
 
 import android.graphics.Point;
@@ -7,8 +7,8 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import fr.ayoubdev.rnr.exceptions.HardwareException;
-import fr.ayoubdev.rnr.helpers.Helper;
+import fr.aybadb.rnr.exceptions.HardwareException;
+import fr.aybadb.rnr.helpers.Helper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

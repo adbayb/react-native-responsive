@@ -1,4 +1,4 @@
-package fr.ayoubdev.rnr.helpers;
+package fr.aybadb.rnr.helpers;
 
 import android.graphics.Point;
 import android.view.*;

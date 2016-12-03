@@ -1,4 +1,4 @@
-package fr.ayoubdev.rnr.modules;
+package fr.aybadb.rnr.modules;
 
 
 import android.hardware.SensorManager;
@@ -9,7 +9,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
-import fr.ayoubdev.rnr.helpers.Helper;
+import fr.aybadb.rnr.helpers.Helper;
 
 public class OrientationListener extends ReactContextBaseJavaModule {
 	private ReactApplicationContext context;

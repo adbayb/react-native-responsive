@@ -1,6 +1,6 @@
 {
   "name": "react-native-responsive",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "A React Native module to manage responsive layouts more efficiently",
   "main": "lib/index.js",
   "directories": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ayoubdev/react-native-responsive.git"
+    "url": "git+https://github.com/aybadb/react-native-responsive.git"
   },
   "keywords": [
     "react",
@@ -38,9 +38,9 @@
   "author": "Ayoub Adib <ayoub.development@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ayoubdev/react-native-responsive/issues"
+    "url": "https://github.com/aybadb/react-native-responsive/issues"
   },
-  "homepage": "https://github.com/ayoubdev/react-native-responsive#readme",
+  "homepage": "https://github.com/aybadb/react-native-responsive#readme",
   "peerDependencies": {
     "react-native": ">=0.25.0"
   },

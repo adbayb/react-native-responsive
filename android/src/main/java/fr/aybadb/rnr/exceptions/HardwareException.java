@@ -1,4 +1,4 @@
-package fr.ayoubdev.rnr.exceptions;
+package fr.aybadb.rnr.exceptions;
 
 public class HardwareException extends Exception {
 	public HardwareException(String detailMessage) {

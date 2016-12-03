@@ -1,12 +1,12 @@
-package fr.ayoubdev.rnr;
+package fr.aybadb.rnr;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.JavaScriptModule;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
-import fr.ayoubdev.rnr.modules.Hardware;
-import fr.ayoubdev.rnr.modules.OrientationListener;
+import fr.aybadb.rnr.modules.Hardware;
+import fr.aybadb.rnr.modules.OrientationListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
