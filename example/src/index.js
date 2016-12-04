@@ -33,6 +33,7 @@ class App extends Component {
     }
 
     onListClick(rowData) {
+        console.log("NATIVEMODULES", NativeModules, NativeModules.CalendarManager);
         if (NativeModules && NativeModules.Hardware) {
             NativeModules.Hardware.getScreenResolution((width, height) => {
                 console.log("Ayoub getScreenResolution() Success", width, height);
