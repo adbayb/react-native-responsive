@@ -33,7 +33,11 @@ class App extends Component {
     }
 
     onListClick(rowData) {
-        console.log("NATIVEMODULES", NativeModules, NativeModules.CalendarManager);
+        //DEBUG to remove
+        const orientation = NativeModules.Orientation;
+        orientation.addEvent('Birthday Party', '4 Privet Drive, Surrey');
+        console.log("NATIVEMODULES", NativeModules);
+        //END DEBUG to remove
         if (NativeModules && NativeModules.Hardware) {
             NativeModules.Hardware.getScreenResolution((width, height) => {
                 console.log("Ayoub getScreenResolution() Success", width, height);
