@@ -1,6 +1,5 @@
 package fr.aybadb.rnr.modules;
 
-
 import android.hardware.SensorManager;
 import android.support.annotation.Nullable;
 import android.view.OrientationEventListener;
@@ -11,6 +10,8 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import fr.aybadb.rnr.helpers.Helper;
 
+
+// TODO to rename to listener ?
 public class OrientationListener extends ReactContextBaseJavaModule {
 	private ReactApplicationContext context;
 	private int rotation;

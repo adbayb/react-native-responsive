@@ -7,7 +7,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 import fr.aybadb.rnr.modules.Hardware;
 import fr.aybadb.rnr.modules.OrientationListener;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

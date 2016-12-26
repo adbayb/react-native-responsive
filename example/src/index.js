@@ -34,9 +34,9 @@ class App extends Component {
 
     onListClick(rowData) {
         //DEBUG to remove
-        const orientation = NativeModules.Orientation;
-        orientation.addEvent('Birthday Party', '4 Privet Drive, Surrey');
         console.log("NATIVEMODULES", NativeModules);
+        const orientation = NativeModules.Orientation;
+        orientation.addEvent();
         //END DEBUG to remove
         if (NativeModules && NativeModules.Hardware) {
             NativeModules.Hardware.getScreenResolution((width, height) => {
@@ -72,22 +72,23 @@ class App extends Component {
     }
 }
 
-const styles = MediaQueryStyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column"
-    },
-    list: {
-        flex: 3
-    },
-    overview: {
-        padding: 10,
-        backgroundColor: "lightgrey"
-    },
-    text: {
-        fontWeight: "bold"
-    }
-}, {
+const styles = MediaQueryStyleSheet.create(
+    {
+        container: {
+            flex: 1,
+            flexDirection: "column"
+        },
+        list: {
+            flex: 3
+        },
+        overview: {
+            padding: 10,
+            backgroundColor: "lightgrey"
+        },
+        text: {
+            fontWeight: "bold"
+        }
+    }, {
         //Smartphone breakpoint:
         "@media (min-device-width: 320)": {
             container: {
@@ -112,6 +113,7 @@ const styles = MediaQueryStyleSheet.create({
                 flex: 2
             }
         }
-    });
+    }
+);
 
 export default App;

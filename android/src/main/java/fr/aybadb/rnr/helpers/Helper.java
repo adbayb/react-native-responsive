@@ -3,8 +3,8 @@ package fr.aybadb.rnr.helpers;
 import android.graphics.Point;
 import android.view.*;
 import com.facebook.react.bridge.ReactApplicationContext;
-
 import static android.content.Context.WINDOW_SERVICE;
+
 
 public class Helper {
 	private Helper() {

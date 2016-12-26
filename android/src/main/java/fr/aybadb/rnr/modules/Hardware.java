@@ -1,6 +1,5 @@
 package fr.aybadb.rnr.modules;
 
-
 import android.graphics.Point;
 import android.view.Display;
 import com.facebook.react.bridge.Callback;
@@ -9,10 +8,11 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import fr.aybadb.rnr.exceptions.HardwareException;
 import fr.aybadb.rnr.helpers.Helper;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+
+// TODO rename to device ?
 public class Hardware extends ReactContextBaseJavaModule {
 	private ReactApplicationContext context;
 
@@ -34,6 +34,7 @@ public class Hardware extends ReactContextBaseJavaModule {
 
 		So we can only set void function but share results via callback or event emitter !
 	*/
+	// TODO: exports constants instead !!!
 	@ReactMethod
 	public void getScreenResolution(Callback onSuccess, Callback onError) {//in pixel
 		//L'api Dimensions.get de RN est dépendant de l'orientation, d'où la réimplémentation de la fonction:
@@ -64,6 +65,7 @@ public class Hardware extends ReactContextBaseJavaModule {
 		return;
 	}
 
+	// TODO: exports constants instead !!!
 	@ReactMethod
 	public void getOrientation(Callback onSuccess, Callback onError) {
 		Display display = Helper.getDisplay(this.context);

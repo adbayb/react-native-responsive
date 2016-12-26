@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E00F3E741E1193B6006FC649 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = E00F3E711E1193B6006FC649 /* Device.m */; };
+		E00F3E751E1193B6006FC649 /* Listener.m in Sources */ = {isa = PBXBuildFile; fileRef = E00F3E731E1193B6006FC649 /* Listener.m */; };
+		E00F3E7A1E1193E1006FC649 /* Device.m in Sources */ = {isa = PBXBuildFile; fileRef = E00F3E771E1193E1006FC649 /* Device.m */; };
+		E00F3E7B1E1193E1006FC649 /* Listener.m in Sources */ = {isa = PBXBuildFile; fileRef = E00F3E791E1193E1006FC649 /* Listener.m */; };
 		E06A47431DF488A100115133 /* RCTResponsive.m in Sources */ = {isa = PBXBuildFile; fileRef = E06A47421DF488A100115133 /* RCTResponsive.m */; };
 		E06A47441DF488A100115133 /* RCTResponsive.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = E06A47411DF488A100115133 /* RCTResponsive.h */; };
 /* End PBXBuildFile section */
@@ -25,6 +29,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E00F3E6F1E118EEE006FC649 /* modules */ = {isa = PBXFileReference; lastKnownFileType = folder; path = modules; sourceTree = "<group>"; };
+		E00F3E701E1193B6006FC649 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Device.h; path = modules/Device.h; sourceTree = "<group>"; };
+		E00F3E711E1193B6006FC649 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Device.m; path = modules/Device.m; sourceTree = "<group>"; };
+		E00F3E721E1193B6006FC649 /* Listener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Listener.h; path = modules/Listener.h; sourceTree = "<group>"; };
+		E00F3E731E1193B6006FC649 /* Listener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Listener.m; path = modules/Listener.m; sourceTree = "<group>"; };
+		E00F3E761E1193E1006FC649 /* Device.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Device.h; path = modules/Device.h; sourceTree = "<group>"; };
+		E00F3E771E1193E1006FC649 /* Device.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Device.m; path = modules/Device.m; sourceTree = "<group>"; };
+		E00F3E781E1193E1006FC649 /* Listener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Listener.h; path = modules/Listener.h; sourceTree = "<group>"; };
+		E00F3E791E1193E1006FC649 /* Listener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Listener.m; path = modules/Listener.m; sourceTree = "<group>"; };
 		E06A473E1DF488A100115133 /* libRCTResponsive.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRCTResponsive.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E06A47411DF488A100115133 /* RCTResponsive.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RCTResponsive.h; sourceTree = "<group>"; };
 		E06A47421DF488A100115133 /* RCTResponsive.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RCTResponsive.m; sourceTree = "<group>"; };
@@ -60,6 +73,15 @@
 		E06A47401DF488A100115133 /* RCTResponsive */ = {
 			isa = PBXGroup;
 			children = (
+				E00F3E701E1193B6006FC649 /* Device.h */,
+				E00F3E711E1193B6006FC649 /* Device.m */,
+				E00F3E721E1193B6006FC649 /* Listener.h */,
+				E00F3E731E1193B6006FC649 /* Listener.m */,
+				E00F3E761E1193E1006FC649 /* Device.h */,
+				E00F3E771E1193E1006FC649 /* Device.m */,
+				E00F3E781E1193E1006FC649 /* Listener.h */,
+				E00F3E791E1193E1006FC649 /* Listener.m */,
+				E00F3E6F1E118EEE006FC649 /* modules */,
 				E06A47411DF488A100115133 /* RCTResponsive.h */,
 				E06A47421DF488A100115133 /* RCTResponsive.m */,
 			);
@@ -124,6 +146,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E06A47431DF488A100115133 /* RCTResponsive.m in Sources */,
+				E00F3E751E1193B6006FC649 /* Listener.m in Sources */,
+				E00F3E741E1193B6006FC649 /* Device.m in Sources */,
+				E00F3E7B1E1193E1006FC649 /* Listener.m in Sources */,
+				E00F3E7A1E1193E1006FC649 /* Device.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +249,7 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../react-native/React/**",
-					"$(SRCROOT)/../../../react-native/ReactCommon/**"
+					"$(SRCROOT)/../../../react-native/ReactCommon/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -236,7 +262,7 @@
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../../../react-native/React/**",
-					"$(SRCROOT)/../../../react-native/ReactCommon/**"
+					"$(SRCROOT)/../../../react-native/ReactCommon/**",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
