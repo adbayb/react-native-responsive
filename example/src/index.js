@@ -27,16 +27,18 @@ class App extends Component {
     }
 
     componentWillMount() {
-        DeviceEventEmitter.addListener("OrientationListener", (event) => {
-            console.log("Ayoub DeviceEventEmitter", event, event.orientation);
+        DeviceEventEmitter.addListener("orientationDidChange", (event) => {
+            console.log("Ayoub DeviceEventEmitter", event);
         });
+    }
+
+    componentWillUnmount() {
+        // TODO remove listener possible ?
     }
 
     onListClick(rowData) {
         //DEBUG to remove
         console.log("NATIVEMODULES", NativeModules);
-        const orientation = NativeModules.Orientation;
-        orientation.addEvent();
         //END DEBUG to remove
         if (NativeModules && NativeModules.Hardware) {
             NativeModules.Hardware.getScreenResolution((width, height) => {

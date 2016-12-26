@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 
-// TODO rename to device ?
+// TODO rename to device ? and include OrientationListener inside it ?
 public class Hardware extends ReactContextBaseJavaModule {
 	private ReactApplicationContext context;
 

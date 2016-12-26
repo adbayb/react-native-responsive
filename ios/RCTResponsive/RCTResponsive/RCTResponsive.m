@@ -1,8 +1,7 @@
 #import "RCTResponsive.h"
 
-
-@implementation Device (RCTExternModule) 
-// React bridge export :
+// React bridge exports :
+@implementation ResponsiveManager (RCTExternModule)
 	RCT_EXPORT_MODULE();
-	RCT_EXTERN_METHOD(addEvent);
+	RCT_EXTERN_METHOD(testBridge);
 @end
