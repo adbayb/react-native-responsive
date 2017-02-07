@@ -248,6 +248,57 @@ With React Native Responsive, you would write:
 
 <br/>
 
+#### Tips for DRY Media Queries
+Much like SCSS and other preprocessed libraries, you can create a variable to reuse common queries. 
+
+In scss you might do:
+```scss
+$xsUp: "@media all and (min-width: 320px)";
+```
+
+With ES6 you might do:
+```js
+const IPHONE_7_AND_UP = `@media (min-device-width: 320) and (min-device-height: 720)`;
+```
+
+<br />
+
+For further `DRY`-ness, create a seperate file with all of your media query breakpoints and export for use throughout your application.
+
+```js
+const IPHONE_WIDTH = 320;
+const IPHONE_7_HEIGHT = 720;
+export const IPHONE_7_AND_UP = `@media (min-device-width: ${IPHONE_WIDTH) and (min-device-height: ${IPHONE_7_HEIGHT)`;
+```
+
+Altogether that would look like:
+
+```js
+import {IPHONE_7_AND_UP} from '../styles/breakpoints';
+
+...
+
+const styles = MediaQueryStyleSheet.create(
+	//Base styles:
+	{
+		container: {
+			flex: 1,
+			flexDirection: "row",
+			backgroundColor: "red"
+		}
+	},
+	//Media Queries styles:
+	{
+		[IPHONE_7_AND_UP]: {
+			container: {
+				flexDirection: "column"
+			}
+		}
+	}
+);
+```
+<br />
+
 ### Demonstration Application
 
 If you want an overview of this library, it's interesting to try the demonstration code located inside `./example` folder.
