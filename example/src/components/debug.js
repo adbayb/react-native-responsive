@@ -1,10 +1,12 @@
 import React from "react";
+import PropTypes from 'prop-types';
+
 import {
 	View,
 	Text
 } from "react-native";
-import { 
-	MediaQuery, 
+import {
+	MediaQuery,
 	MediaQueryDebug,
 	MediaQueryDecorator
 } from "react-native-responsive";
@@ -14,7 +16,7 @@ import {
 }, true)
 class Debug extends React.Component {
 	static propTypes = {
-		consoleDebug: React.PropTypes.bool.isRequired
+		consoleDebug: PropTypes.bool.isRequired
 	};
 	static defaultProps = {
 		consoleDebug: false
