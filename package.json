@@ -36,6 +36,9 @@
     "adib"
   ],
   "author": "Ayoub Adib <ayoub.development@gmail.com>",
+  "contributors": [
+    "Kohki Makimoto <kohki.makimoto@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ayoubdev/react-native-responsive/issues"
