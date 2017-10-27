@@ -3,7 +3,8 @@ import React, {
 } from "react";
 import {
 	View,
-	Text
+	Text,
+	ViewPropType
 } from "react-native";
 
 const Detail = (props) => {
@@ -13,7 +14,7 @@ const Detail = (props) => {
 				{props.children}
 			</View>
 		);
-	
+
 	return (
 		<View style={props.style}>
 			<Text> No Item selected </Text>
@@ -22,7 +23,7 @@ const Detail = (props) => {
 };
 
 Detail.propTypes = {
-	...View.propTypes,
+	...ViewPropType,
 	children: PropTypes.node.isRequired
 };
 
